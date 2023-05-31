@@ -1,6 +1,6 @@
 package com.example.proyecto.Servicios;
 
-import com.example.proyecto.Entidad.Equipos;
+import com.example.proyecto.Entidad.Equipo;
 import com.example.proyecto.Repositorio.RepositorioEquipos;
 import org.springframework.stereotype.Service;
 
@@ -14,11 +14,11 @@ public class ServicioEquipos {
         this.repositorio = repositorio;
     }
 
-    public List<Equipos> mostrarTodos() {
+    public List<Equipo> mostrarTodos() {
         return repositorio.findAll();
     }
 
-    public Equipos BuscarUsuario(int Equ_Id) {
+    public Equipo BuscarEquipo(int Equ_Id) {
         if (repositorio.findById(String.valueOf(Equ_Id)).isPresent())
             return repositorio.findById(String.valueOf(Equ_Id)).get();
         else

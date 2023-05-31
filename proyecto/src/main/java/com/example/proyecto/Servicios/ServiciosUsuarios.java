@@ -1,7 +1,7 @@
 package com.example.proyecto.Servicios;
 
 
-import com.example.proyecto.Entidad.Usuarios;
+import com.example.proyecto.Entidad.Usuario;
 import com.example.proyecto.Repositorio.RepositorioUsuarios;
 import org.springframework.stereotype.Service;
 
@@ -15,11 +15,11 @@ public class ServiciosUsuarios {
         this.repositorio = repositorio;
     }
 
-    public List<Usuarios> mostrarTodosUsuarios() {
+    public List<Usuario> mostrarTodosUsuarios() {
         return repositorio.findAll();
     }
 
-    public Usuarios BuscarUsuario(int Usu_Documento) {
+    public Usuario BuscarUsuario(int Usu_Documento) {
         if (repositorio.findById(String.valueOf(Usu_Documento)).isPresent())
             return repositorio.findById(String.valueOf(Usu_Documento)).get();
         else

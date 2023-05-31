@@ -1,40 +1,60 @@
 package com.example.proyecto.Entidad;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
+import java.math.BigInteger;
 import java.sql.Time;
 import java.util.Date;
 
 @Entity
 @Table(name = "Prestamos")
-public class Prestamos {
+public class Prestamo {
     @Id
-    @Column(unique=true, length = 10)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(unique = true, length = 11)
     private int Pres_Id;
-    @Column(unique=true, length = 10)
+
+    @Column(unique = true, length = 11)
     private int Pres_Equipos_id;
-    @Column(unique = true, length = 10)
-    private int Pres_Usuarios_Documento;
-    @Column(unique = true, length = 10)
+
+    @Column(unique = true, length = 11)
+    private Integer Pres_Usuarios_Documento;
+
+    @Column(unique = true)
     private Date Pres_Fec_Entrega;
-    @Column(unique = true,length = 10)
+
+    @Column(unique = true)
     private Date Pres_Fec_Devolucion;
-    @Column(unique=true, length = 10)
+
+    @Column(unique = true)
     private Time Pres_Hora_Entrega;
-    @Column(unique=true, length = 10)
+
+    @Column(unique = true)
     private Time Pres_Hora_Devolucion;
-    @Column(unique=true, length = 10)
+
+    @Column(unique = true, length = 11)
     private int Pres_Tiempo_Limite;
-    @Column(unique=true, length = 250)
+
+    @Column(unique = true, length = 250)
     private String Pres_Observaciones_entrega;
-    @Column(unique=true, length = 250)
+
+    @Column(unique = true, length = 250)
     private String Pres_Observaciones_recibido;
 
 
-    public Prestamos(int pres_Id, int pres_Equipos_id, int pres_Usuarios_Documento, Date pres_Fec_Entrega, Date pres_Fec_Devolucion, Time pres_Hora_Entrega, Time pres_Hora_Devolucion, int pres_Tiempo_Limite, String pres_Observaciones_entrega, String pres_Observaciones_recibido) {
+    @ManyToOne
+    @JoinColumn(name = "equipo_id")
+    private Equipo equipo;
+
+    @ManyToOne
+    @JoinColumn(name = "usuario_documento")
+    private Usuario usuario;
+
+    @OneToOne(mappedBy = "prestamo")
+    private Sancion sancion;
+
+
+    public Prestamo(int pres_Id, int pres_Equipos_id, Integer pres_Usuarios_Documento, Date pres_Fec_Entrega, Date pres_Fec_Devolucion, Time pres_Hora_Entrega, Time pres_Hora_Devolucion, int pres_Tiempo_Limite, String pres_Observaciones_entrega, String pres_Observaciones_recibido, Equipo equipo, Usuario usuario, Sancion sancion) {
         Pres_Id = pres_Id;
         Pres_Equipos_id = pres_Equipos_id;
         Pres_Usuarios_Documento = pres_Usuarios_Documento;
@@ -45,11 +65,13 @@ public class Prestamos {
         Pres_Tiempo_Limite = pres_Tiempo_Limite;
         Pres_Observaciones_entrega = pres_Observaciones_entrega;
         Pres_Observaciones_recibido = pres_Observaciones_recibido;
+        this.equipo = equipo;
+        this.usuario = usuario;
+        this.sancion = sancion;
     }
 
-    public Prestamos() {
+    public Prestamo() {
     }
-
 
     public int getPres_Id() {
         return Pres_Id;
@@ -67,11 +89,11 @@ public class Prestamos {
         Pres_Equipos_id = pres_Equipos_id;
     }
 
-    public int getPres_Usuarios_Documento() {
+    public Integer getPres_Usuarios_Documento() {
         return Pres_Usuarios_Documento;
     }
 
-    public void setPres_Usuarios_Documento(int pres_Usuarios_Documento) {
+    public void setPres_Usuarios_Documento(Integer pres_Usuarios_Documento) {
         Pres_Usuarios_Documento = pres_Usuarios_Documento;
     }
 
@@ -131,9 +153,33 @@ public class Prestamos {
         Pres_Observaciones_recibido = pres_Observaciones_recibido;
     }
 
+    public Equipo getEquipo() {
+        return equipo;
+    }
+
+    public void setEquipo(Equipo equipo) {
+        this.equipo = equipo;
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
+
+    public Sancion getSancion() {
+        return sancion;
+    }
+
+    public void setSancion(Sancion sancion) {
+        this.sancion = sancion;
+    }
+
     @Override
     public String toString() {
-        return "Prestamos{" +
+        return "Prestamo{" +
                 "Pres_Id=" + Pres_Id +
                 ", Pres_Equipos_id=" + Pres_Equipos_id +
                 ", Pres_Usuarios_Documento=" + Pres_Usuarios_Documento +
@@ -144,6 +190,9 @@ public class Prestamos {
                 ", Pres_Tiempo_Limite=" + Pres_Tiempo_Limite +
                 ", Pres_Observaciones_entrega='" + Pres_Observaciones_entrega + '\'' +
                 ", Pres_Observaciones_recibido='" + Pres_Observaciones_recibido + '\'' +
+                ", equipo=" + equipo +
+                ", usuario=" + usuario +
+                ", sancion=" + sancion +
                 '}';
     }
 }

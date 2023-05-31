@@ -1,31 +1,40 @@
 package com.example.proyecto.Entidad;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
+
+import java.util.List;
 
 @Entity
 @Table(name="Equipos")
-public class Equipos {
+public class Equipo {
     @Id
-    @Column(unique=true, length = 10)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(unique = true, length = 11)
     private int Equ_id;
-    @Column(nullable = false,length = 30)
+
+    @Column(nullable = false, length = 50)
     private String Equi_tipo;
-    @Column(nullable = false)
+
+    @Column(nullable = false, length = 50)
     private String Equi_modelo;
-    @Column(nullable = false)
+
+    @Column(nullable = false, length = 50)
     private String Equi_color;
-    @Column(nullable = false)
+
+    @Column(nullable = false, length = 50)
     private String Equi_serial;
-    @Column(nullable = false)
+
+    @Column(nullable = false, length = 50)
     private String Equi_estado;
-    @Column(nullable = false)
+
+    @Column(nullable = false, length = 50)
     private String equi_especialidad;
 
+    @OneToMany(mappedBy = "equipo")
+    private List<Prestamo> prestamos;
 
-    public Equipos(int equ_id, String equi_tipo, String equi_modelo, String equi_color, String equi_serial, String equi_estado, String equi_especialidad) {
+
+    public Equipo(int equ_id, String equi_tipo, String equi_modelo, String equi_color, String equi_serial, String equi_estado, String equi_especialidad) {
         Equ_id = equ_id;
         Equi_tipo = equi_tipo;
         Equi_modelo = equi_modelo;
@@ -35,7 +44,7 @@ public class Equipos {
         this.equi_especialidad = equi_especialidad;
     }
 
-    public Equipos() {
+    public Equipo() {
     }
 
     public int getEqu_id() {
