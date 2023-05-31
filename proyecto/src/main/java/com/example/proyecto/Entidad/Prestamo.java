@@ -14,50 +14,43 @@ public class Prestamo {
     @Column(unique = true, length = 11)
     private int Pres_Id;
 
-    @Column(unique = true, length = 11)
-    private int Pres_Equipos_id;
-
-    @Column(unique = true, length = 11)
-    private Integer Pres_Usuarios_Documento;
-
-    @Column(unique = true)
+    @Column(nullable = false)
     private Date Pres_Fec_Entrega;
 
-    @Column(unique = true)
+    @Column(nullable = false)
     private Date Pres_Fec_Devolucion;
 
-    @Column(unique = true)
+    @Column(nullable = false)
     private Time Pres_Hora_Entrega;
 
-    @Column(unique = true)
+    @Column(nullable = false)
     private Time Pres_Hora_Devolucion;
 
-    @Column(unique = true, length = 11)
+    @Column(nullable = false, length = 11)
     private int Pres_Tiempo_Limite;
 
-    @Column(unique = true, length = 250)
+    @Column(nullable = false, length = 250)
     private String Pres_Observaciones_entrega;
 
-    @Column(unique = true, length = 250)
+    @Column(nullable = false, length = 250)
     private String Pres_Observaciones_recibido;
 
 
     @ManyToOne
-    @JoinColumn(name = "equipo_id")
+    @JoinColumn(name = "Pres_Equipos_id",unique = true)
     private Equipo equipo;
 
     @ManyToOne
-    @JoinColumn(name = "usuario_documento")
+    @JoinColumn(name = "Pres_Usuarios_Documento",unique = true)
     private Usuario usuario;
 
     @OneToOne(mappedBy = "prestamo")
     private Sancion sancion;
 
 
-    public Prestamo(int pres_Id, int pres_Equipos_id, Integer pres_Usuarios_Documento, Date pres_Fec_Entrega, Date pres_Fec_Devolucion, Time pres_Hora_Entrega, Time pres_Hora_Devolucion, int pres_Tiempo_Limite, String pres_Observaciones_entrega, String pres_Observaciones_recibido, Equipo equipo, Usuario usuario, Sancion sancion) {
+    public Prestamo(int pres_Id, Date pres_Fec_Entrega, Date pres_Fec_Devolucion, Time pres_Hora_Entrega, Time pres_Hora_Devolucion, int pres_Tiempo_Limite, String pres_Observaciones_entrega, String pres_Observaciones_recibido) {
         Pres_Id = pres_Id;
-        Pres_Equipos_id = pres_Equipos_id;
-        Pres_Usuarios_Documento = pres_Usuarios_Documento;
+
         Pres_Fec_Entrega = pres_Fec_Entrega;
         Pres_Fec_Devolucion = pres_Fec_Devolucion;
         Pres_Hora_Entrega = pres_Hora_Entrega;
@@ -65,9 +58,6 @@ public class Prestamo {
         Pres_Tiempo_Limite = pres_Tiempo_Limite;
         Pres_Observaciones_entrega = pres_Observaciones_entrega;
         Pres_Observaciones_recibido = pres_Observaciones_recibido;
-        this.equipo = equipo;
-        this.usuario = usuario;
-        this.sancion = sancion;
     }
 
     public Prestamo() {
@@ -81,21 +71,7 @@ public class Prestamo {
         Pres_Id = pres_Id;
     }
 
-    public int getPres_Equipos_id() {
-        return Pres_Equipos_id;
-    }
 
-    public void setPres_Equipos_id(int pres_Equipos_id) {
-        Pres_Equipos_id = pres_Equipos_id;
-    }
-
-    public Integer getPres_Usuarios_Documento() {
-        return Pres_Usuarios_Documento;
-    }
-
-    public void setPres_Usuarios_Documento(Integer pres_Usuarios_Documento) {
-        Pres_Usuarios_Documento = pres_Usuarios_Documento;
-    }
 
     public Date getPres_Fec_Entrega() {
         return Pres_Fec_Entrega;
@@ -153,36 +129,10 @@ public class Prestamo {
         Pres_Observaciones_recibido = pres_Observaciones_recibido;
     }
 
-    public Equipo getEquipo() {
-        return equipo;
-    }
-
-    public void setEquipo(Equipo equipo) {
-        this.equipo = equipo;
-    }
-
-    public Usuario getUsuario() {
-        return usuario;
-    }
-
-    public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
-    }
-
-    public Sancion getSancion() {
-        return sancion;
-    }
-
-    public void setSancion(Sancion sancion) {
-        this.sancion = sancion;
-    }
-
     @Override
     public String toString() {
         return "Prestamo{" +
                 "Pres_Id=" + Pres_Id +
-                ", Pres_Equipos_id=" + Pres_Equipos_id +
-                ", Pres_Usuarios_Documento=" + Pres_Usuarios_Documento +
                 ", Pres_Fec_Entrega=" + Pres_Fec_Entrega +
                 ", Pres_Fec_Devolucion=" + Pres_Fec_Devolucion +
                 ", Pres_Hora_Entrega=" + Pres_Hora_Entrega +
@@ -190,9 +140,6 @@ public class Prestamo {
                 ", Pres_Tiempo_Limite=" + Pres_Tiempo_Limite +
                 ", Pres_Observaciones_entrega='" + Pres_Observaciones_entrega + '\'' +
                 ", Pres_Observaciones_recibido='" + Pres_Observaciones_recibido + '\'' +
-                ", equipo=" + equipo +
-                ", usuario=" + usuario +
-                ", sancion=" + sancion +
                 '}';
     }
 }

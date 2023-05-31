@@ -25,6 +25,10 @@ public class ControladorEquipos {
     public Equipo buscarID(@PathVariable("cod") int Equ_id){
         return servicio.BuscarEquipo(Equ_id);
     }
+    @GetMapping("/insertarEquipo")
+    public String insertarEquipoo(@RequestBody Equipo id){
+        return servicio.insertarEquipo(id);
+    }
 
     @DeleteMapping("/Eliminar/{codigo}")
     public String eliminar(@PathVariable("codigo") String codigo) {

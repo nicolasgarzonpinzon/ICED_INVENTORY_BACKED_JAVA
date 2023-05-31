@@ -5,6 +5,7 @@ import com.example.proyecto.Repositorio.RepositorioEquipos;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ServicioEquipos {
@@ -24,6 +25,16 @@ public class ServicioEquipos {
         else
             return null;
     }
+
+    public String insertarEquipo(Equipo id){
+        if (this.repositorio.findById(String.valueOf(id.getEqu_id())).isPresent())
+            return "Datos no registrado";
+        else {
+            repositorio.save(id);
+            return "Se registro el equipo correctamente";
+        }
+    }
+
 
     public String eliminar(String codigo) {
         if (repositorio.findById(codigo).isPresent()) {

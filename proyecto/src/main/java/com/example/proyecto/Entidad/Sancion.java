@@ -12,16 +12,16 @@ public class Sancion {
     @Column(unique = true, length = 11)
     private int San_Pres_Id;
 
-    @Column(unique = true)
+    @Column(nullable = false)
     private Date San_Fecha;
 
-    @Column(unique = true)
+    @Column(nullable = false)
     private Time San_Hora;
 
-    @Column(unique = true, length = 11)
+    @Column(nullable = false, length = 11)
     private int San_tiempo;
 
-    @Column(unique = true, length = 1000)
+    @Column(nullable = false, length = 1000)
     private String San_Descripcion;
 
     @OneToOne

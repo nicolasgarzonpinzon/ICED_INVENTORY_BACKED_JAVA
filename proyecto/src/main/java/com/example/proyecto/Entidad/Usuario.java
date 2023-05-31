@@ -33,7 +33,7 @@ public class Usuario {
     @OneToMany(mappedBy = "usuario")
     private List<Prestamo> prestamos;
 
-    public Usuario(Integer usu_Documento, String usu_Nombre, String usu_Apellido, String usu_Tipo, String usu_Celular, String usu_Correo, String usu_Ficha, List<Prestamo> prestamos) {
+    public Usuario(Integer usu_Documento, String usu_Nombre, String usu_Apellido, String usu_Tipo, String usu_Celular, String usu_Correo, String usu_Ficha) {
         Usu_Documento = usu_Documento;
         Usu_Nombre = usu_Nombre;
         Usu_Apellido = usu_Apellido;
@@ -41,7 +41,6 @@ public class Usuario {
         Usu_Celular = usu_Celular;
         Usu_Correo = usu_Correo;
         Usu_Ficha = usu_Ficha;
-        this.prestamos = prestamos;
     }
 
     public Usuario() {
@@ -103,14 +102,6 @@ public class Usuario {
         Usu_Ficha = usu_Ficha;
     }
 
-    public List<Prestamo> getPrestamos() {
-        return prestamos;
-    }
-
-    public void setPrestamos(List<Prestamo> prestamos) {
-        this.prestamos = prestamos;
-    }
-
     @Override
     public String toString() {
         return "Usuario{" +
@@ -121,9 +112,6 @@ public class Usuario {
                 ", Usu_Celular='" + Usu_Celular + '\'' +
                 ", Usu_Correo='" + Usu_Correo + '\'' +
                 ", Usu_Ficha='" + Usu_Ficha + '\'' +
-                ", prestamos=" + prestamos +
                 '}';
     }
-
-
 }
