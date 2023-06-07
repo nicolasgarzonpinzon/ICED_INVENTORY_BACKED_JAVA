@@ -5,7 +5,6 @@ import com.example.proyecto.Repositorio.RepositorioEquipos;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class ServicioEquipos {
@@ -19,7 +18,7 @@ public class ServicioEquipos {
         return repositorio.findAll();
     }
 
-    public Equipo BuscarEquipo(int Equ_Id) {
+    public  Equipo BuscarEquipo(int Equ_Id) {
         if (repositorio.findById(String.valueOf(Equ_Id)).isPresent())
             return repositorio.findById(String.valueOf(Equ_Id)).get();
         else
@@ -36,7 +35,7 @@ public class ServicioEquipos {
     }
 
 
-    public String eliminar(String codigo) {
+    public String eliminarEquipo(String codigo) {
         if (repositorio.findById(codigo).isPresent()) {
             repositorio.deleteById(codigo);
             return "El Dispositivo con el codigo " + codigo + " fue eliminado exitosamente";
@@ -44,4 +43,15 @@ public class ServicioEquipos {
             return "No se encontró ningún Dispositivo con el codigo " + codigo;
         }
     }
+
+    public String actualizarEquipo(Equipo E){
+        if (repositorio.findById(String.valueOf(E.getEqu_id())).isPresent()){
+            repositorio.save(E);
+            return "El equipo se Actualizo correctamente";
+        }else{
+
+            return "El id del equipo ya existe";
+        }
+    }
 }
+

@@ -1,13 +1,12 @@
 package com.example.proyecto.Controlador;
 
 import com.example.proyecto.Entidad.Prestamo;
+import com.example.proyecto.Entidad.Usuario;
 import com.example.proyecto.Servicios.ServicioPrestamos;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-
+@RestController
 public class ControladorPrestamos {
 
     private ServicioPrestamos Servicio;
@@ -21,7 +20,7 @@ public class ControladorPrestamos {
         return Servicio.MostrarTodosPrestamos();
     }
 
-    @GetMapping("/buscarPrestamo/{codigo}")
+    @GetMapping("/BuscarPrestamo/{codigo}")
     public Prestamo buscarPrestamoID(@PathVariable("codigo") int San_Pres_Id){
         return Servicio.BuscarSancion(San_Pres_Id);
     }
@@ -29,6 +28,11 @@ public class ControladorPrestamos {
     @DeleteMapping("/EliminarPrestamo/{codigo}")
     public String eliminarPrestamo(@PathVariable("codigo") String San_Pres_Id) {
         return Servicio.eliminarPrestamo(San_Pres_Id);
+    }
+
+    @PostMapping("/ActualizarPrestamo")
+    public String actualizarPrestamoo(@RequestBody Prestamo id){
+        return Servicio.actualizarPrestamo(id);
     }
 
 }

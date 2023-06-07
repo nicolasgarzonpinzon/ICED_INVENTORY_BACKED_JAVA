@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 
 import java.math.BigInteger;
 import java.sql.Time;
+import java.time.LocalDate;
 import java.util.Date;
 
 @Entity
@@ -15,10 +16,10 @@ public class Prestamo {
     private int Pres_Id;
 
     @Column(nullable = false)
-    private Date Pres_Fec_Entrega;
+    private LocalDate Pres_Fec_Entrega;
 
     @Column(nullable = false)
-    private Date Pres_Fec_Devolucion;
+    private LocalDate Pres_Fec_Devolucion;
 
     @Column(nullable = false)
     private Time Pres_Hora_Entrega;
@@ -37,20 +38,18 @@ public class Prestamo {
 
 
     @ManyToOne
-    @JoinColumn(name = "Pres_Equipos_id",unique = true)
+    @JoinColumn(name = "Pres_Equipos_id")
     private Equipo equipo;
 
     @ManyToOne
-    @JoinColumn(name = "Pres_Usuarios_Documento",unique = true)
+    @JoinColumn(name = "Pres_Usuarios_Documento")
     private Usuario usuario;
 
     @OneToOne(mappedBy = "prestamo")
     private Sancion sancion;
 
-
-    public Prestamo(int pres_Id, Date pres_Fec_Entrega, Date pres_Fec_Devolucion, Time pres_Hora_Entrega, Time pres_Hora_Devolucion, int pres_Tiempo_Limite, String pres_Observaciones_entrega, String pres_Observaciones_recibido) {
+    public Prestamo(int pres_Id, LocalDate pres_Fec_Entrega, LocalDate pres_Fec_Devolucion, Time pres_Hora_Entrega, Time pres_Hora_Devolucion, int pres_Tiempo_Limite, String pres_Observaciones_entrega, String pres_Observaciones_recibido) {
         Pres_Id = pres_Id;
-
         Pres_Fec_Entrega = pres_Fec_Entrega;
         Pres_Fec_Devolucion = pres_Fec_Devolucion;
         Pres_Hora_Entrega = pres_Hora_Entrega;
@@ -71,21 +70,19 @@ public class Prestamo {
         Pres_Id = pres_Id;
     }
 
-
-
-    public Date getPres_Fec_Entrega() {
+    public LocalDate getPres_Fec_Entrega() {
         return Pres_Fec_Entrega;
     }
 
-    public void setPres_Fec_Entrega(Date pres_Fec_Entrega) {
+    public void setPres_Fec_Entrega(LocalDate pres_Fec_Entrega) {
         Pres_Fec_Entrega = pres_Fec_Entrega;
     }
 
-    public Date getPres_Fec_Devolucion() {
+    public LocalDate getPres_Fec_Devolucion() {
         return Pres_Fec_Devolucion;
     }
 
-    public void setPres_Fec_Devolucion(Date pres_Fec_Devolucion) {
+    public void setPres_Fec_Devolucion(LocalDate pres_Fec_Devolucion) {
         Pres_Fec_Devolucion = pres_Fec_Devolucion;
     }
 
@@ -140,6 +137,9 @@ public class Prestamo {
                 ", Pres_Tiempo_Limite=" + Pres_Tiempo_Limite +
                 ", Pres_Observaciones_entrega='" + Pres_Observaciones_entrega + '\'' +
                 ", Pres_Observaciones_recibido='" + Pres_Observaciones_recibido + '\'' +
+                ", equipo=" + equipo +
+                ", usuario=" + usuario +
+                ", sancion=" + sancion +
                 '}';
     }
 }

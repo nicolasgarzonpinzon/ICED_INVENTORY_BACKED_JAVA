@@ -4,16 +4,18 @@ import jakarta.persistence.*;
 
 import java.sql.Date;
 import java.sql.Time;
+import java.time.LocalDate;
+
 @Entity
 @Table(name="Sanciones")
 public class Sancion {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(unique = true, length = 11)
+    @Column(nullable = false, length = 11)
     private int San_Pres_Id;
 
     @Column(nullable = false)
-    private Date San_Fecha;
+    private LocalDate San_Fecha;
 
     @Column(nullable = false)
     private Time San_Hora;
@@ -28,7 +30,7 @@ public class Sancion {
     @JoinColumn(name = "pres_id")
     private Prestamo prestamo;
 
-    public Sancion(int san_Pres_Id, Date san_Fecha, Time san_Hora, int san_tiempo, String san_Descripcion) {
+    public Sancion(int san_Pres_Id, LocalDate san_Fecha, Time san_Hora, int san_tiempo, String san_Descripcion) {
         San_Pres_Id = san_Pres_Id;
         San_Fecha = san_Fecha;
         San_Hora = san_Hora;
@@ -47,11 +49,11 @@ public class Sancion {
         San_Pres_Id = san_Pres_Id;
     }
 
-    public Date getSan_Fecha() {
+    public LocalDate getSan_Fecha() {
         return San_Fecha;
     }
 
-    public void setSan_Fecha(Date san_Fecha) {
+    public void setSan_Fecha(LocalDate san_Fecha) {
         San_Fecha = san_Fecha;
     }
 
@@ -78,6 +80,7 @@ public class Sancion {
     public void setSan_Descripcion(String san_Descripcion) {
         San_Descripcion = san_Descripcion;
     }
+
 
     @Override
     public String toString() {

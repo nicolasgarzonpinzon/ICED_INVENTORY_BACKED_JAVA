@@ -5,10 +5,9 @@ import jakarta.persistence.*;
 import java.util.List;
 
 @Entity
-@Table(name="Usuarios")
+@Table(name="Usuario")
 public class Usuario {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(unique = true, length = 11)
     private Integer Usu_Documento;
 
