@@ -1,8 +1,9 @@
 package com.example.proyecto.Entidad;
 
 import jakarta.persistence.*;
+import org.jetbrains.annotations.NotNull;
 
-import java.sql.Date;
+
 import java.sql.Time;
 import java.time.LocalDate;
 
@@ -28,15 +29,19 @@ public class Sancion {
 
     @OneToOne
     @JoinColumn(name = "pres_id")
+    @NotNull
     private Prestamo prestamo;
 
-    public Sancion(int san_Pres_Id, LocalDate san_Fecha, Time san_Hora, int san_tiempo, String san_Descripcion) {
+
+    public Sancion(int san_Pres_Id, LocalDate san_Fecha, Time san_Hora, int san_tiempo, String san_Descripcion, Prestamo prestamo) {
         San_Pres_Id = san_Pres_Id;
         San_Fecha = san_Fecha;
         San_Hora = san_Hora;
         San_tiempo = san_tiempo;
         San_Descripcion = san_Descripcion;
+        this.prestamo = prestamo;
     }
+
 
     public Sancion() {
     }
@@ -44,6 +49,13 @@ public class Sancion {
     public int getSan_Pres_Id() {
         return San_Pres_Id;
     }
+    public int getPres_Id() {
+        if (prestamo != null) {
+            return prestamo.getPres_Id();
+        }
+        return -1; // O cualquier otro valor predeterminado para indicar que no hay prestamo asociado
+    }
+
 
     public void setSan_Pres_Id(int san_Pres_Id) {
         San_Pres_Id = san_Pres_Id;

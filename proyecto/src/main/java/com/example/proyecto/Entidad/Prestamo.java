@@ -137,9 +137,6 @@ public class Prestamo {
                 ", Pres_Tiempo_Limite=" + Pres_Tiempo_Limite +
                 ", Pres_Observaciones_entrega='" + Pres_Observaciones_entrega + '\'' +
                 ", Pres_Observaciones_recibido='" + Pres_Observaciones_recibido + '\'' +
-                ", equipo=" + equipo +
-                ", usuario=" + usuario +
-                ", sancion=" + sancion +
                 '}';
     }
 }

@@ -2,6 +2,8 @@ package com.example.proyecto.Controlador;
 import com.example.proyecto.Entidad.Equipo;
 import com.example.proyecto.Servicios.ServicioEquipos;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
