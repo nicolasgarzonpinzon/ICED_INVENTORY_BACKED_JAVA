@@ -15,7 +15,7 @@ public class ControladorUsuarios {
     public  ControladorUsuarios(ServiciosUsuarios servicio){ this.servicio= servicio;}
 
     @GetMapping("/ListarUsuarios")
-    public List<Usuario> ListarUsuarios(){
+    public List<Usuario> listarUsuarios() {
         return servicio.mostrarTodosUsuarios();
     }
 

@@ -17,19 +17,21 @@ public class ControladorEquipos {
     }
     //llamados de servicios
 
-    @GetMapping("/ListarEquipos")
-    public List<Equipo> ListarEquipos(){
-        return servicio.mostrarTodos();
+     @GetMapping("/listarequipos")
+    public List<Equipo> ListarEquipos( ) {
+        List<Equipo> equipos = servicio.mostrarTodos();
+        return equipos;
     }
 
     @GetMapping("/Buscar/{cod}")
     public Equipo buscarID(@PathVariable("cod") int Equ_id){
         return servicio.BuscarEquipo(Equ_id);
     }
-    @GetMapping("/InsertarEquipo")
-    public String insertarEquipoo(@RequestBody Equipo id){
-        return servicio.insertarEquipo(id);
+    @PostMapping("/InsertarEquipo")
+    public String insertarEquipoo(@RequestBody Equipo equipo) {
+        return servicio.insertarEquipo(equipo);
     }
+
 
     @DeleteMapping("/Eliminar/{codigo}")
     public String eliminar(@PathVariable("codigo") String codigo) {
