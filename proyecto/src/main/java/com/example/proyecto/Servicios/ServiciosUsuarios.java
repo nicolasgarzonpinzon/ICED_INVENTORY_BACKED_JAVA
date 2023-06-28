@@ -27,12 +27,20 @@ public class ServiciosUsuarios {
             return null;
     }
 
-    public String insertarUsuario(Usuario Doc){
-        if (this.repositorio.findById(String.valueOf(Doc.getUsu_Documento())).isPresent())
-            return "Usuario no Registrado";
-        else {
-            repositorio.save(Doc);
-            return "El usuario se Registro Correctamente";
+    public String insertarUsuario(Usuario usuario) {
+        if (usuario == null) {
+            return "Objeto de usuario nulo";
+        }
+
+        if (repositorio.findById(String.valueOf(usuario.getUsu_Documento())).isPresent()) {
+            return "El Usuario ya está registrado";
+        } else {
+            try {
+                repositorio.save(usuario);
+                return "Se registró el usuario correctamente";
+            } catch (Exception e) {
+                return "Error al registrar el usuario: " + e.getMessage();
+            }
         }
     }
 
