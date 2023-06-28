@@ -27,7 +27,8 @@ public class ControladorEquipos {
     public Equipo buscarID(@PathVariable("cod") int Equ_id){
         return servicio.BuscarEquipo(Equ_id);
     }
-    @PostMapping("/InsertarEquipo")
+
+    @PostMapping("/InsertarEquipo/")
     public String insertarEquipoo(@RequestBody Equipo equipo) {
         return servicio.insertarEquipo(equipo);
     }

@@ -25,14 +25,23 @@ public class ServicioEquipos {
             return null;
     }
 
-    public String insertarEquipo(Equipo id){
-        if (this.repositorio.findById(String.valueOf(id.getEqu_id())).isPresent())
-            return "Datos no registrado";
-        else {
-            repositorio.save(id);
-            return "Se registro el equipo correctamente";
+    public String insertarEquipo(Equipo equipo) {
+        if (equipo == null) {
+            return "Objeto de equipo nulo";
+        }
+
+        if (repositorio.findById(String.valueOf(equipo.getEqu_id())).isPresent()) {
+            return "El equipo ya está registrado";
+        } else {
+            try {
+                repositorio.save(equipo);
+                return "Se registró el equipo correctamente";
+            } catch (Exception e) {
+                return "Error al registrar el equipo: " + e.getMessage();
+            }
         }
     }
+
 
 
     public String eliminarEquipo(String codigo) {

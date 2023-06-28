@@ -38,11 +38,12 @@ public class Equipo {
         Equ_id = equ_id;
         Equi_tipo = equi_tipo;
         Equi_modelo = equi_modelo;
-        Equi_color = equi_color;
         Equi_serial = equi_serial;
         Equi_estado = equi_estado;
+        Equi_color = equi_color;
         this.equi_especialidad = equi_especialidad;
     }
+
 
     public Equipo() {
     }
