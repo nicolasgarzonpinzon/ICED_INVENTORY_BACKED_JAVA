@@ -2,6 +2,7 @@ package com.example.proyecto.Servicios;
 
 import com.example.proyecto.Entidad.Equipo;
 import com.example.proyecto.Repositorio.RepositorioEquipos;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -20,14 +21,16 @@ public class ServicioEquipos {
         return repositorio.findAll();
     }
 
-    public Equipo buscarEquipo(int equId) throws NoSuchElementException {
+    public ResponseEntity<?> buscarEquipo(int equId) {
         Optional<Equipo> equipoOptional = repositorio.findById(String.valueOf(equId));
         if (equipoOptional.isPresent()) {
-            return equipoOptional.get();
+            Equipo equipo = equipoOptional.get();
+            return ResponseEntity.ok(equipo);
         } else {
-            throw new NoSuchElementException("Equipo no encontrado");
+            return ResponseEntity.notFound().build();
         }
     }
+
 
     public String insertarEquipo(Equipo equipo) {
         if (equipo == null) {

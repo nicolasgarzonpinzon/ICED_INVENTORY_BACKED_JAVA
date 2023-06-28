@@ -1,6 +1,7 @@
 package com.example.proyecto.Controlador;
 import com.example.proyecto.Entidad.Equipo;
 import com.example.proyecto.Servicios.ServicioEquipos;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -24,7 +25,7 @@ public class ControladorEquipos {
     }
 
     @GetMapping("/BuscarEquipo/{cod}")
-    public Equipo buscarID(@PathVariable("cod") int Equ_id){
+    public ResponseEntity<?> buscarID(@PathVariable("cod") int Equ_id){
         return servicio.buscarEquipo(Equ_id);
     }
 
