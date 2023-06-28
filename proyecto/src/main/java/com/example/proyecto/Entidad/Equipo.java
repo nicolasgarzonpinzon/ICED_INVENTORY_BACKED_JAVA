@@ -107,12 +107,12 @@ public class Equipo {
     @Override
     public String toString() {
         return "Equipos{" +
-                "Equ_id=" + Equ_id +
-                ", Equi_tipo='" + Equi_tipo + '\'' +
-                ", Equi_modelo='" + Equi_modelo + '\'' +
-                ", Equi_color='" + Equi_color + '\'' +
-                ", Equi_serial='" + Equi_serial + '\'' +
-                ", Equi_estado='" + Equi_estado + '\'' +
+                "equ_id=" + Equ_id +
+                ", equi_tipo='" + Equi_tipo + '\'' +
+                ", equi_modelo='" + Equi_modelo + '\'' +
+                ", equi_color='" + Equi_color + '\'' +
+                ", equi_serial='" + Equi_serial + '\'' +
+                ", equi_estado='" + Equi_estado + '\'' +
                 ", equi_especialidad='" + equi_especialidad + '\'' +
                 '}';
     }

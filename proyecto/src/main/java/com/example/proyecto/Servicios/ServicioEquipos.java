@@ -5,6 +5,8 @@ import com.example.proyecto.Repositorio.RepositorioEquipos;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.NoSuchElementException;
+import java.util.Optional;
 
 @Service
 public class ServicioEquipos {
@@ -18,11 +20,13 @@ public class ServicioEquipos {
         return repositorio.findAll();
     }
 
-    public  Equipo BuscarEquipo(int Equ_Id) {
-        if (repositorio.findById(String.valueOf(Equ_Id)).isPresent())
-            return repositorio.findById(String.valueOf(Equ_Id)).get();
-        else
-            return null;
+    public Equipo buscarEquipo(int equId) throws NoSuchElementException {
+        Optional<Equipo> equipoOptional = repositorio.findById(String.valueOf(equId));
+        if (equipoOptional.isPresent()) {
+            return equipoOptional.get();
+        } else {
+            throw new NoSuchElementException("Equipo no encontrado");
+        }
     }
 
     public String insertarEquipo(Equipo equipo) {
