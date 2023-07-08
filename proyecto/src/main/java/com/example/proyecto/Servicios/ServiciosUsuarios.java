@@ -1,12 +1,13 @@
 package com.example.proyecto.Servicios;
-
-
 import com.example.proyecto.Entidad.Equipo;
 import com.example.proyecto.Entidad.Usuario;
 import com.example.proyecto.Repositorio.RepositorioUsuarios;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.NoSuchElementException;
+import java.util.Optional;
 
 @Service
 public class ServiciosUsuarios {
@@ -20,11 +21,14 @@ public class ServiciosUsuarios {
         return repositorio.findAll();
     }
 
-    public Usuario BuscarUsuario(int Usu_Documento) {
-        if (repositorio.findById(String.valueOf(Usu_Documento)).isPresent())
-            return repositorio.findById(String.valueOf(Usu_Documento)).get();
-        else
-            return null;
+    public ResponseEntity<?> BuscarUsuario(int Usu_Documento) {
+        Optional<Usuario> usuarioOptional = repositorio.findById(String.valueOf(Usu_Documento));
+        if (usuarioOptional.isPresent()) {
+            Usuario usuario = usuarioOptional.get();
+            return ResponseEntity.ok(usuario);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
 
     public String insertarUsuario(Usuario usuario) {

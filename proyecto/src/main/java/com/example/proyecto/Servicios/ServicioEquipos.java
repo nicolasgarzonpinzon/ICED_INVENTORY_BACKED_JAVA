@@ -1,5 +1,4 @@
 package com.example.proyecto.Servicios;
-
 import com.example.proyecto.Entidad.Equipo;
 import com.example.proyecto.Repositorio.RepositorioEquipos;
 import org.springframework.http.ResponseEntity;

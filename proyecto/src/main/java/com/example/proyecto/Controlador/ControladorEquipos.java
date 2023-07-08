@@ -5,7 +5,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
-
 import java.util.List;
 
 @RestController
@@ -19,7 +18,7 @@ public class ControladorEquipos {
     //llamados de servicios
 
      @GetMapping("/listarEquipos")
-    public List<Equipo> ListarEquipos( ) {
+    public List<Equipo> ListarEquipos() {
         List<Equipo> equipos = servicio.mostrarTodos();
         return equipos;
     }
