@@ -39,7 +39,7 @@ public class ControladorEquipos {
         return servicio.eliminarEquipo(codigo);
     }
 
-    @PostMapping("/ActualizarEquipo")
+    @PostMapping("/ActualizarEquipo/")
     public String actualizarProductos(@RequestBody Equipo E){
         return servicio.actualizarEquipo(E);
     }
