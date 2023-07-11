@@ -1,5 +1,6 @@
 package com.example.proyecto.Servicios;
 
+import com.example.proyecto.Entidad.Equipo;
 import com.example.proyecto.Entidad.Prestamo;
 import com.example.proyecto.Entidad.Usuario;
 import com.example.proyecto.Repositorio.RepositorioPrestamos;
@@ -41,6 +42,24 @@ public class ServicioPrestamos {
         }else{
 
             return "El id del prestamo no se modificar: ERROR al actualizar el Prestamo: "+id.getPres_Id();
+        }
+    }
+
+
+    public String insertarPrestamo(Prestamo prestamo) {
+        if (prestamo == null) {
+            return "Objeto de prestamo nulo";
+        }
+
+        if (repositorio.findById(String.valueOf(prestamo.getPres_Id())).isPresent()) {
+            return "El prestamo ya está registrado";
+        } else {
+            try {
+                repositorio.save(prestamo);
+                return "Se registró el prestamo correctamente";
+            } catch (Exception e) {
+                return "Error al registrar el prestamo: " + e.getMessage();
+            }
         }
     }
 }

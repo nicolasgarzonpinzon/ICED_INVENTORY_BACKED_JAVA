@@ -35,4 +35,11 @@ public class ControladorPrestamos {
         return Servicio.actualizarPrestamo(id);
     }
 
+    @PostMapping("/InsertarPrestamo/")
+    public String insertarPrestamo(@RequestBody Prestamo prestamo){
+        return Servicio.insertarPrestamo(prestamo);
+    }
+
+
+
 }
