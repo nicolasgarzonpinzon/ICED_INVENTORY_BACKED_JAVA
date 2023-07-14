@@ -33,18 +33,14 @@ public class ControladorPrestamos {
                     HttpStatus.NOT_FOUND, "El prestamo no fue encontrado. Escriba bien");
         }
         return prestamo;
-
     }
-
-
+    @PostMapping("/InsertarPrestamo/")
+    public String insertarPrestamoo(@RequestBody Prestamo prestamo){
+        return Servicio.insertarPrestamo(prestamo);
+    }
     @PostMapping("/ActualizarPrestamo")
     public String actualizarPrestamoo(@RequestBody Prestamo id){
         return Servicio.actualizarPrestamo(id);
-    }
-
-    @PostMapping("/InsertarPrestamo/")
-    public String insertarPrestamo(@RequestBody Prestamo prestamo){
-        return Servicio.insertarPrestamo(prestamo);
     }
 
 
