@@ -3,7 +3,11 @@ package com.example.proyecto.Controlador;
 import com.example.proyecto.Entidad.Prestamo;
 import com.example.proyecto.Entidad.Usuario;
 import com.example.proyecto.Servicios.ServicioPrestamos;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.ErrorResponse;
+import org.springframework.web.ErrorResponseException;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 @RestController
@@ -21,14 +25,17 @@ public class ControladorPrestamos {
     }
 
     @GetMapping("/BuscarPrestamo/{codigo}")
-    public Prestamo buscarPrestamoID(@PathVariable("codigo") int San_Pres_Id){
-        return Servicio.BuscarSancion(San_Pres_Id);
+    public Prestamo buscarPrestamoID(@PathVariable("codigo") int presId) {
+        Prestamo prestamo = Servicio.Buscarprestamo(presId);
+
+        if (prestamo == null) {
+            throw new ResponseStatusException(
+                    HttpStatus.NOT_FOUND, "El prestamo no fue encontrado. Escriba bien");
+        }
+        return prestamo;
+
     }
 
-    @DeleteMapping("/EliminarPrestamo/{codigo}")
-    public String eliminarPrestamo(@PathVariable("codigo") String San_Pres_Id) {
-        return Servicio.eliminarPrestamo(San_Pres_Id);
-    }
 
     @PostMapping("/ActualizarPrestamo")
     public String actualizarPrestamoo(@RequestBody Prestamo id){

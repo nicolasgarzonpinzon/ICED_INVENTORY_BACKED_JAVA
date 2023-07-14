@@ -51,7 +51,7 @@ public class Sancion {
     }
     public int getPres_Id() {
         if (prestamo != null) {
-            return prestamo.getPres_Id();
+            return prestamo.getPresId();
         }
         return -1; // O cualquier otro valor predeterminado para indicar que no hay prestamo asociado
     }

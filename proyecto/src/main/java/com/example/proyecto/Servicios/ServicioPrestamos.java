@@ -19,29 +19,23 @@ public class ServicioPrestamos {
     public List<Prestamo> MostrarTodosPrestamos(){
         return repositorio.findAll();
     }
-    public Prestamo BuscarSancion(int San_Pres_Id){
-        if (repositorio.findById(String.valueOf(San_Pres_Id)).isPresent())
-            return repositorio.findById(String.valueOf(San_Pres_Id)).get();
+    public Prestamo Buscarprestamo(int PresId){
+        if (repositorio.findById(String.valueOf(PresId)).isPresent())
+            return repositorio.findById(String.valueOf(PresId)).get();
             else
                 return null;
     }
 
-    public String eliminarPrestamo(String San_Pres_Id) {
-        if (repositorio.findById(San_Pres_Id).isPresent()) {
-            repositorio.deleteById(San_Pres_Id);
-            return "El Prestamo con el codigo " + San_Pres_Id + " fue eliminado exitosamente";
-        } else {
-            return "No se encontró Ningun Prestamo con el codigo " + San_Pres_Id;
-        }
-    }
+
+
 
     public String actualizarPrestamo(Prestamo id){
-        if (repositorio.findById(String.valueOf(id.getPres_Id())).isPresent()){
+        if (repositorio.findById(String.valueOf(id.getPresId())).isPresent()){
             repositorio.save(id);
             return "El prestamo se Actualizo exitosamente";
         }else{
 
-            return "El id del prestamo no se modificar: ERROR al actualizar el Prestamo: "+id.getPres_Id();
+            return "El id del prestamo no se modificar: ERROR al actualizar el Prestamo: "+id.getPresId();
         }
     }
 
@@ -51,7 +45,7 @@ public class ServicioPrestamos {
             return "Objeto de prestamo nulo";
         }
 
-        if (repositorio.findById(String.valueOf(prestamo.getPres_Id())).isPresent()) {
+        if (repositorio.findById(String.valueOf(prestamo.getPresId())).isPresent()) {
             return "El prestamo ya está registrado";
         } else {
             try {

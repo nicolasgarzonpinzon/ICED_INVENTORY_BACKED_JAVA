@@ -12,30 +12,29 @@ import java.util.Date;
 public class Prestamo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(unique = true, length = 11)
-    private int Pres_Id;
+    @Column(name = "Pres_Id")
+    private int presId;
 
-    @Column(nullable = false)
-    private LocalDate Pres_Fec_Entrega;
+    @Column(nullable = false, name = "Pres_Fec_Entrega")
+    private LocalDate fechaEntrega;
 
-    @Column(nullable = false)
-    private LocalDate Pres_Fec_Devolucion;
+    @Column(nullable = false, name = "Pres_Fec_Devolucion")
+    private LocalDate fechaDevolucion;
 
-    @Column(nullable = false)
-    private Time Pres_Hora_Entrega;
+    @Column(nullable = false, name = "Pres_Hora_Entrega")
+    private Time horaEntrega;
 
-    @Column(nullable = false)
-    private Time Pres_Hora_Devolucion;
+    @Column(nullable = false, name = "Pres_Hora_Devolucion")
+    private Time horaDevolucion;
 
-    @Column(nullable = false, length = 11)
-    private int Pres_Tiempo_Limite;
+    @Column(nullable = false, name = "Pres_Tiempo_Limite")
+    private int tiempoLimite;
 
-    @Column(nullable = false, length = 250)
-    private String Pres_Observaciones_entrega;
+    @Column(nullable = false, name = "Pres_Observaciones_entrega", length = 250)
+    private String observacionesEntrega;
 
-    @Column(nullable = false, length = 250)
-    private String Pres_Observaciones_recibido;
-
+    @Column(nullable = false, name = "Pres_Observaciones_recibido", length = 250)
+    private String observacionesRecibido;
 
     @ManyToOne
     @JoinColumn(name = "Pres_Equipos_id")
@@ -48,95 +47,119 @@ public class Prestamo {
     @OneToOne(mappedBy = "prestamo")
     private Sancion sancion;
 
-    public Prestamo(int pres_Id, LocalDate pres_Fec_Entrega, LocalDate pres_Fec_Devolucion, Time pres_Hora_Entrega, Time pres_Hora_Devolucion, int pres_Tiempo_Limite, String pres_Observaciones_entrega, String pres_Observaciones_recibido) {
-        Pres_Id = pres_Id;
-        Pres_Fec_Entrega = pres_Fec_Entrega;
-        Pres_Fec_Devolucion = pres_Fec_Devolucion;
-        Pres_Hora_Entrega = pres_Hora_Entrega;
-        Pres_Hora_Devolucion = pres_Hora_Devolucion;
-        Pres_Tiempo_Limite = pres_Tiempo_Limite;
-        Pres_Observaciones_entrega = pres_Observaciones_entrega;
-        Pres_Observaciones_recibido = pres_Observaciones_recibido;
+    public Prestamo(int presId, LocalDate fechaEntrega, LocalDate fechaDevolucion, Time horaEntrega, Time horaDevolucion, int tiempoLimite, String observacionesEntrega, String observacionesRecibido) {
+        this.presId = presId;
+        this.fechaEntrega = fechaEntrega;
+        this.fechaDevolucion = fechaDevolucion;
+        this.horaEntrega = horaEntrega;
+        this.horaDevolucion = horaDevolucion;
+        this.tiempoLimite = tiempoLimite;
+        this.observacionesEntrega = observacionesEntrega;
+        this.observacionesRecibido = observacionesRecibido;
     }
 
     public Prestamo() {
     }
 
-    public int getPres_Id() {
-        return Pres_Id;
+    public int getPresId() {
+        return presId;
     }
 
-    public void setPres_Id(int pres_Id) {
-        Pres_Id = pres_Id;
+    public void setPresId(int presId) {
+        this.presId = presId;
     }
 
-    public LocalDate getPres_Fec_Entrega() {
-        return Pres_Fec_Entrega;
+    public LocalDate getFechaEntrega() {
+        return fechaEntrega;
     }
 
-    public void setPres_Fec_Entrega(LocalDate pres_Fec_Entrega) {
-        Pres_Fec_Entrega = pres_Fec_Entrega;
+    public void setFechaEntrega(LocalDate fechaEntrega) {
+        this.fechaEntrega = fechaEntrega;
     }
 
-    public LocalDate getPres_Fec_Devolucion() {
-        return Pres_Fec_Devolucion;
+    public LocalDate getFechaDevolucion() {
+        return fechaDevolucion;
     }
 
-    public void setPres_Fec_Devolucion(LocalDate pres_Fec_Devolucion) {
-        Pres_Fec_Devolucion = pres_Fec_Devolucion;
+    public void setFechaDevolucion(LocalDate fechaDevolucion) {
+        this.fechaDevolucion = fechaDevolucion;
     }
 
-    public Time getPres_Hora_Entrega() {
-        return Pres_Hora_Entrega;
+    public Time getHoraEntrega() {
+        return horaEntrega;
     }
 
-    public void setPres_Hora_Entrega(Time pres_Hora_Entrega) {
-        Pres_Hora_Entrega = pres_Hora_Entrega;
+    public void setHoraEntrega(Time horaEntrega) {
+        this.horaEntrega = horaEntrega;
     }
 
-    public Time getPres_Hora_Devolucion() {
-        return Pres_Hora_Devolucion;
+    public Time getHoraDevolucion() {
+        return horaDevolucion;
     }
 
-    public void setPres_Hora_Devolucion(Time pres_Hora_Devolucion) {
-        Pres_Hora_Devolucion = pres_Hora_Devolucion;
+    public void setHoraDevolucion(Time horaDevolucion) {
+        this.horaDevolucion = horaDevolucion;
     }
 
-    public int getPres_Tiempo_Limite() {
-        return Pres_Tiempo_Limite;
+    public int getTiempoLimite() {
+        return tiempoLimite;
     }
 
-    public void setPres_Tiempo_Limite(int pres_Tiempo_Limite) {
-        Pres_Tiempo_Limite = pres_Tiempo_Limite;
+    public void setTiempoLimite(int tiempoLimite) {
+        this.tiempoLimite = tiempoLimite;
     }
 
-    public String getPres_Observaciones_entrega() {
-        return Pres_Observaciones_entrega;
+    public String getObservacionesEntrega() {
+        return observacionesEntrega;
     }
 
-    public void setPres_Observaciones_entrega(String pres_Observaciones_entrega) {
-        Pres_Observaciones_entrega = pres_Observaciones_entrega;
+    public void setObservacionesEntrega(String observacionesEntrega) {
+        this.observacionesEntrega = observacionesEntrega;
     }
 
-    public String getPres_Observaciones_recibido() {
-        return Pres_Observaciones_recibido;
+    public String getObservacionesRecibido() {
+        return observacionesRecibido;
     }
 
-    public void setPres_Observaciones_recibido(String pres_Observaciones_recibido) {
-        Pres_Observaciones_recibido = pres_Observaciones_recibido;
+    public void setObservacionesRecibido(String observacionesRecibido) {
+        this.observacionesRecibido = observacionesRecibido;
+    }
+
+    public Equipo getEquipo() {
+        return equipo;
+    }
+
+    public void setEquipo(Equipo equipo) {
+        this.equipo = equipo;
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
+
+    public Sancion getSancion() {
+        return sancion;
+    }
+
+    public void setSancion(Sancion sancion) {
+        this.sancion = sancion;
     }
 
     @Override
     public String toString() {
         return "Prestamo{" +
-                "Pres_Id=" + Pres_Id +
-                ", Pres_Fec_Entrega=" + Pres_Fec_Entrega +
-                ", Pres_Fec_Devolucion=" + Pres_Fec_Devolucion +
-                ", Pres_Hora_Entrega=" + Pres_Hora_Entrega +
-                ", Pres_Hora_Devolucion=" + Pres_Hora_Devolucion +
-                ", Pres_Tiempo_Limite=" + Pres_Tiempo_Limite +
-                ", Pres_Observaciones_entrega='" + Pres_Observaciones_entrega + '\'' +
-                ", Pres_Observaciones_recibido='" + Pres_Observaciones_recibido + '\'' +
+                "presId=" + presId +
+                ", fechaEntrega=" + fechaEntrega +
+                ", fechaDevolucion=" + fechaDevolucion +
+                ", horaEntrega=" + horaEntrega +
+                ", horaDevolucion=" + horaDevolucion +
+                ", tiempoLimite=" + tiempoLimite +
+                ", observacionesEntrega='" + observacionesEntrega + '\'' +
+                ", observacionesRecibido='" + observacionesRecibido + '\'' +
                 '}';
     }
 }
