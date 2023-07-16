@@ -29,7 +29,6 @@ public class Sancion {
 
     @OneToOne
     @JoinColumn(name = "pres_id")
-    @NotNull
     private Prestamo prestamo;
 
 

@@ -26,12 +26,20 @@ public class ServicioSanciones {
             return null;
     }
 
-    public String insertarSanciones(Sancion getPres_Id){
-        if (this.repositorio.findById(String.valueOf(getPres_Id.getPres_Id())).isPresent())
-            return "Sancion no registrada";
-        else {
-            repositorio.save(getPres_Id);
-            return "La sancion se registro exitosamente";
+    public String insertarSanciones(Sancion sancion) {
+        if (sancion == null) {
+            return "Objeto de Sancion nulo";
+        }
+
+        if (repositorio.findById(String.valueOf(sancion.getPres_Id())).isPresent()) {
+            return "Sancion ya registrada";
+        } else {
+            try {
+                repositorio.save(sancion);
+                return "Se registró la Sancion correctamente";
+            } catch (Exception e) {
+                return "Error al registrar la Sancion: " + e.getMessage();
+            }
         }
     }
 
@@ -50,7 +58,7 @@ public class ServicioSanciones {
             return "Sancion actualiazada correctamente";
         }else{
 
-            return "la sancion no se actualizo";
+            return "la sancion no se actualizo, id ya existente";
         }
     }
 

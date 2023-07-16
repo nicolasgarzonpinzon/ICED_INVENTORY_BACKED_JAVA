@@ -23,9 +23,9 @@ public class ControladorSanciones {
         return servicio.BuscarSanciones(san_pres_id);
     }
 
-    @GetMapping("/InsertarSanciones")
-    public String insertarEquipoo(@RequestBody Sancion san_pres_id){
-        return servicio.insertarSanciones(san_pres_id);
+    @PostMapping("/InsertarSanciones/")
+    public String insertarEquipoo(@RequestBody Sancion sancion){
+        return servicio.insertarSanciones(sancion);
     }
 
     @DeleteMapping("/EliminarSanciones/{id}")
@@ -33,7 +33,7 @@ public class ControladorSanciones {
         return servicio.eliminarSanciones(id);
     }
 
-    @PostMapping("/ActualizarSanciones")
+    @PostMapping("/ActualizarSanciones/")
     public String actualizarProductos(@RequestBody Sancion actu){
         return servicio.actualizarSanciones(actu);
     }
