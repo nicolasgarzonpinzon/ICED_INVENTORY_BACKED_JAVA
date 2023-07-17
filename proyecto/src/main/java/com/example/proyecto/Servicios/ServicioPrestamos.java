@@ -57,5 +57,14 @@ public class ServicioPrestamos {
         }
     }
 
+    public String eliminarPrestamo(String id) {
+        if (repositorio.findById(id).isPresent()) {
+            repositorio.deleteById(id);
+            return "El Dispositivo con el codigo " + id + " fue eliminado exitosamente";
+        } else {
+            return "No se encontró ningún Dispositivo con el codigo " + id;
+        }
+    }
+
 
 }

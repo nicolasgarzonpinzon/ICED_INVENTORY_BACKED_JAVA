@@ -19,7 +19,7 @@ public class ControladorPrestamos {
         this.Servicio= servicio;
     }
 
-    @GetMapping("/ListarPrestamos")
+        @GetMapping("/ListarPrestamos")
     public List<Prestamo> listarPrestamos(){
         return Servicio.MostrarTodosPrestamos();
     }
@@ -33,6 +33,10 @@ public class ControladorPrestamos {
                     HttpStatus.NOT_FOUND, "El prestamo no fue encontrado. Escriba bien");
         }
         return prestamo;
+    }
+    @DeleteMapping("/EliminarPrestamo/{presId}")
+    public String eliminarUsuarioo(@PathVariable("presId") String id) {
+        return Servicio.eliminarPrestamo(id);
     }
     @PostMapping("/InsertarPrestamo/")
     public String insertarPrestamoo(@RequestBody Prestamo prestamo){

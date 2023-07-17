@@ -3,9 +3,11 @@ package com.example.proyecto.Servicios;
 import com.example.proyecto.Entidad.Equipo;
 import com.example.proyecto.Entidad.Sancion;
 import com.example.proyecto.Repositorio.RepositorioSanciones;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ServicioSanciones {
@@ -19,11 +21,14 @@ public class ServicioSanciones {
     }
 
 
-    public Sancion BuscarSanciones(int san_pres_id) {
-        if (repositorio.findById(String.valueOf(san_pres_id)).isPresent())
-            return repositorio.findById(String.valueOf(san_pres_id)).get();
-        else
-            return null;
+    public ResponseEntity<?> BuscarSancion(int id_sancion) {
+        Optional<Sancion> sancionOptional = repositorio.findById(String.valueOf(id_sancion));
+        if (sancionOptional.isPresent()) {
+            Sancion sancion = sancionOptional.get();
+            return ResponseEntity.ok(sancion);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
 
     public String insertarSanciones(Sancion sancion) {
@@ -46,9 +51,9 @@ public class ServicioSanciones {
     public String eliminarSanciones(String id) {
         if (repositorio.findById(id).isPresent()) {
             repositorio.deleteById(id);
-            return "El Dispositivo con el codigo " + id + " fue eliminado exitosamente";
+            return "la sancion con el codigo " + id + " fue eliminada exitosamente";
         } else {
-            return "No se encontró ningún Dispositivo con el codigo " + id;
+            return "No se encontró ningúna sancion con el codigo " + id;
         }
     }
 

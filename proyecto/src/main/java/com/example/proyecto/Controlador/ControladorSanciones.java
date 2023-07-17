@@ -1,7 +1,7 @@
 package com.example.proyecto.Controlador;
-import com.example.proyecto.Entidad.Equipo;
 import com.example.proyecto.Entidad.Sancion;
 import com.example.proyecto.Servicios.ServicioSanciones;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -19,8 +19,8 @@ public class ControladorSanciones {
     }
 
     @GetMapping("/BuscarSanciones/{cod}")
-    public Sancion buscarID(@PathVariable("cod") int san_pres_id){
-        return servicio.BuscarSanciones(san_pres_id);
+    public ResponseEntity<?> buscarID(@PathVariable("cod") int id_sancion){
+        return servicio.BuscarSancion(id_sancion);
     }
 
     @PostMapping("/InsertarSanciones/")
