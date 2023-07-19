@@ -9,7 +9,7 @@ import java.util.List;
 public class Usuario {
     @Id
     @Column(unique = true, length = 11)
-    private Integer Usu_Documento;
+    private int Usu_Documento;
 
     @Column(nullable = false, length = 100)
     private String Usu_Nombre;
@@ -32,7 +32,10 @@ public class Usuario {
     @OneToMany(mappedBy = "usuario")
     private List<Prestamo> prestamos;
 
-    public Usuario(Integer usu_Documento, String usu_Nombre, String usu_Apellido, String usu_Tipo, String usu_Celular, String usu_Correo, String usu_Ficha) {
+    public Usuario() {
+    }
+
+    public Usuario(int usu_Documento, String usu_Nombre, String usu_Apellido, String usu_Tipo, String usu_Celular, String usu_Correo, String usu_Ficha) {
         Usu_Documento = usu_Documento;
         Usu_Nombre = usu_Nombre;
         Usu_Apellido = usu_Apellido;
@@ -42,14 +45,11 @@ public class Usuario {
         Usu_Ficha = usu_Ficha;
     }
 
-    public Usuario() {
-    }
-
-    public Integer getUsu_Documento() {
+    public int getUsu_Documento() {
         return Usu_Documento;
     }
 
-    public void setUsu_Documento(Integer usu_Documento) {
+    public void setUsu_Documento(int usu_Documento) {
         Usu_Documento = usu_Documento;
     }
 

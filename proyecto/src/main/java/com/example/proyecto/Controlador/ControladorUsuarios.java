@@ -33,7 +33,7 @@ public class ControladorUsuarios {
         return servicio.eliminarUsuario(Usu_Documento);
     }
 
-    @PostMapping("/ActualizarUsuario")
+    @PostMapping("/ActualizarUsuario/")
     public String actualizarUsuarioo(@RequestBody Usuario Doc){
         return servicio.actualizarUsuario(Doc);
     }
