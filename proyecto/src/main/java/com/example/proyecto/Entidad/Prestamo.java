@@ -1,11 +1,8 @@
 package com.example.proyecto.Entidad;
 
 import jakarta.persistence.*;
-
-import java.math.BigInteger;
-import java.sql.Time;
 import java.time.LocalDate;
-import java.util.Date;
+
 
 @Entity
 @Table(name = "Prestamos")
@@ -18,23 +15,11 @@ public class Prestamo {
     @Column(nullable = false, name = "Pres_Fec_Entrega")
     private LocalDate fechaEntrega;
 
-    @Column(nullable = false, name = "Pres_Fec_Devolucion")
-    private LocalDate fechaDevolucion;
-
-    @Column(nullable = false, name = "Pres_Hora_Entrega")
-    private Time horaEntrega;
-
-    @Column(nullable = false, name = "Pres_Hora_Devolucion")
-    private Time horaDevolucion;
-
     @Column(nullable = false, name = "Pres_Tiempo_Limite")
     private int tiempoLimite;
 
     @Column(nullable = false, name = "Pres_Observaciones_entrega", length = 250)
     private String observacionesEntrega;
-
-    @Column(nullable = false, name = "Pres_Observaciones_recibido", length = 250)
-    private String observacionesRecibido;
 
     @ManyToOne
     @JoinColumn(name = "Pres_Equipos_id")
@@ -47,15 +32,12 @@ public class Prestamo {
     @OneToOne(mappedBy = "prestamo")
     private Sancion sancion;
 
-    public Prestamo(int presId, LocalDate fechaEntrega, LocalDate fechaDevolucion, Time horaEntrega, Time horaDevolucion, int tiempoLimite, String observacionesEntrega, String observacionesRecibido) {
+    public Prestamo(int presId, LocalDate fechaEntrega,int tiempoLimite, String observacionesEntrega) {
         this.presId = presId;
         this.fechaEntrega = fechaEntrega;
-        this.fechaDevolucion = fechaDevolucion;
-        this.horaEntrega = horaEntrega;
-        this.horaDevolucion = horaDevolucion;
         this.tiempoLimite = tiempoLimite;
         this.observacionesEntrega = observacionesEntrega;
-        this.observacionesRecibido = observacionesRecibido;
+
     }
 
     public Prestamo() {
@@ -77,30 +59,6 @@ public class Prestamo {
         this.fechaEntrega = fechaEntrega;
     }
 
-    public LocalDate getFechaDevolucion() {
-        return fechaDevolucion;
-    }
-
-    public void setFechaDevolucion(LocalDate fechaDevolucion) {
-        this.fechaDevolucion = fechaDevolucion;
-    }
-
-    public Time getHoraEntrega() {
-        return horaEntrega;
-    }
-
-    public void setHoraEntrega(Time horaEntrega) {
-        this.horaEntrega = horaEntrega;
-    }
-
-    public Time getHoraDevolucion() {
-        return horaDevolucion;
-    }
-
-    public void setHoraDevolucion(Time horaDevolucion) {
-        this.horaDevolucion = horaDevolucion;
-    }
-
     public int getTiempoLimite() {
         return tiempoLimite;
     }
@@ -115,14 +73,6 @@ public class Prestamo {
 
     public void setObservacionesEntrega(String observacionesEntrega) {
         this.observacionesEntrega = observacionesEntrega;
-    }
-
-    public String getObservacionesRecibido() {
-        return observacionesRecibido;
-    }
-
-    public void setObservacionesRecibido(String observacionesRecibido) {
-        this.observacionesRecibido = observacionesRecibido;
     }
 
     public Equipo getEquipo() {
@@ -154,12 +104,8 @@ public class Prestamo {
         return "Prestamo{" +
                 "presId=" + presId +
                 ", fechaEntrega=" + fechaEntrega +
-                ", fechaDevolucion=" + fechaDevolucion +
-                ", horaEntrega=" + horaEntrega +
-                ", horaDevolucion=" + horaDevolucion +
                 ", tiempoLimite=" + tiempoLimite +
                 ", observacionesEntrega='" + observacionesEntrega + '\'' +
-                ", observacionesRecibido='" + observacionesRecibido + '\'' +
                 '}';
     }
 }
