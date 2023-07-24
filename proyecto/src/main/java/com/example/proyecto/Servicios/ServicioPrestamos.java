@@ -4,9 +4,12 @@ import com.example.proyecto.Entidad.Equipo;
 import com.example.proyecto.Entidad.Prestamo;
 import com.example.proyecto.Entidad.Usuario;
 import com.example.proyecto.Repositorio.RepositorioPrestamos;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ServicioPrestamos {
@@ -19,12 +22,18 @@ public class ServicioPrestamos {
     public List<Prestamo> MostrarTodosPrestamos(){
         return repositorio.findAll();
     }
-    public Prestamo Buscarprestamo(int PresId){
-        if (repositorio.findById(String.valueOf(PresId)).isPresent())
-            return repositorio.findById(String.valueOf(PresId)).get();
-            else
-                return null;
+
+    public ResponseEntity<?> buscarPrestamo(int presId) {
+        Optional<Prestamo> prestamoOptional = repositorio.findById(String.valueOf(presId));
+        if (prestamoOptional.isPresent()) {
+            Prestamo prestamo = prestamoOptional.get();
+            return ResponseEntity.ok(prestamo);
+        } else {
+            String mensaje = "El préstamo con ID " + presId + " no existe.";
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(mensaje);
+        }
     }
+
 
 
 

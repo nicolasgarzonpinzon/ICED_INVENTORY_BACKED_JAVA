@@ -4,6 +4,7 @@ import com.example.proyecto.Entidad.Prestamo;
 import com.example.proyecto.Entidad.Usuario;
 import com.example.proyecto.Servicios.ServicioPrestamos;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.ErrorResponse;
 import org.springframework.web.ErrorResponseException;
 import org.springframework.web.bind.annotation.*;
@@ -24,15 +25,9 @@ public class ControladorPrestamos {
         return Servicio.MostrarTodosPrestamos();
     }
 
-    @GetMapping("/BuscarPrestamo/{codigo}")
-    public Prestamo buscarPrestamoID(@PathVariable("codigo") int presId) {
-        Prestamo prestamo = Servicio.Buscarprestamo(presId);
-
-        if (prestamo == null) {
-            throw new ResponseStatusException(
-                    HttpStatus.NOT_FOUND, "El prestamo no fue encontrado. Escriba bien");
-        }
-        return prestamo;
+    @GetMapping("/BuscarPrestamo/{cod}")
+    public ResponseEntity<?> buscarID(@PathVariable("cod") int PresId){
+        return Servicio.buscarPrestamo(PresId);
     }
     @DeleteMapping("/EliminarPrestamo/{presId}")
     public String eliminarUsuarioo(@PathVariable("presId") String id) {
@@ -42,7 +37,7 @@ public class ControladorPrestamos {
     public String insertarPrestamoo(@RequestBody Prestamo prestamo){
         return Servicio.insertarPrestamo(prestamo);
     }
-    @PostMapping("/ActualizarPrestamo")
+    @PostMapping("/ActualizarPrestamo/")
     public String actualizarPrestamoo(@RequestBody Prestamo id){
         return Servicio.actualizarPrestamo(id);
     }
