@@ -1,6 +1,9 @@
 package com.example.proyecto.Entidad;
 
 import jakarta.persistence.*;
+
+import javax.xml.crypto.Data;
+import java.sql.Time;
 import java.time.LocalDate;
 
 
@@ -14,6 +17,9 @@ public class Prestamo {
 
     @Column(nullable = false, name = "Pres_Fec_Entrega")
     private LocalDate fechaEntrega;
+
+    @Column(nullable = false, name = "Pres_Hora_Entrega")
+    private Time horaEntrega;
 
     @Column(nullable = false, name = "Pres_Tiempo_Limite")
     private int tiempoLimite;
@@ -32,12 +38,12 @@ public class Prestamo {
     @OneToOne(mappedBy = "prestamo")
     private Sancion sancion;
 
-    public Prestamo(int presId, LocalDate fechaEntrega,int tiempoLimite, String observacionesEntrega) {
+    public Prestamo(int presId, LocalDate fechaEntrega, Time horaEntrega, int tiempoLimite, String observacionesEntrega) {
         this.presId = presId;
         this.fechaEntrega = fechaEntrega;
+        this.horaEntrega = horaEntrega;
         this.tiempoLimite = tiempoLimite;
         this.observacionesEntrega = observacionesEntrega;
-
     }
 
     public Prestamo() {
@@ -58,7 +64,12 @@ public class Prestamo {
     public void setFechaEntrega(LocalDate fechaEntrega) {
         this.fechaEntrega = fechaEntrega;
     }
-
+    public Time getHoraEntrega() {
+        return horaEntrega;
+    }
+    public void setHoraEntrega(Time horaEntrega) {
+        this.horaEntrega = horaEntrega;
+    }
     public int getTiempoLimite() {
         return tiempoLimite;
     }
@@ -104,6 +115,7 @@ public class Prestamo {
         return "Prestamo{" +
                 "presId=" + presId +
                 ", fechaEntrega=" + fechaEntrega +
+                ", horaEntrega=" + horaEntrega +
                 ", tiempoLimite=" + tiempoLimite +
                 ", observacionesEntrega='" + observacionesEntrega + '\'' +
                 '}';
