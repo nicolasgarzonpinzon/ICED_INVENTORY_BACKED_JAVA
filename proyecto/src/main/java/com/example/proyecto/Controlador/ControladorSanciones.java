@@ -1,4 +1,5 @@
 package com.example.proyecto.Controlador;
+import com.example.proyecto.Entidad.Prestamo;
 import com.example.proyecto.Entidad.Sancion;
 import com.example.proyecto.Servicios.ServicioSanciones;
 import org.springframework.http.ResponseEntity;
@@ -24,7 +25,7 @@ public class ControladorSanciones {
     }
 
     @PostMapping("/InsertarSanciones/")
-    public String insertarEquipoo(@RequestBody Sancion sancion){
+    public String insertarSancion(@RequestBody Sancion sancion){
         return servicio.insertarSanciones(sancion);
     }
 

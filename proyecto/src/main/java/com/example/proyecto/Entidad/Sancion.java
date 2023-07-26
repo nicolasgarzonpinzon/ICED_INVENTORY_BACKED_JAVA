@@ -2,6 +2,7 @@ package com.example.proyecto.Entidad;
 
 import jakarta.persistence.*;
 import org.jetbrains.annotations.NotNull;
+import org.springframework.http.ResponseEntity;
 
 
 import java.sql.Time;
@@ -28,6 +29,7 @@ public class Sancion {
     private String San_Descripcion;
 
     @OneToOne
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @JoinColumn(name = "pres_id")
     private Prestamo prestamo;
 
@@ -102,6 +104,9 @@ public class Sancion {
                 ", San_tiempo=" + San_tiempo +
                 ", San_Descripcion='" + San_Descripcion + '\'' +
                 '}';
+    }
+
+    public void setPrestamo(ResponseEntity<?> prestamo) {
     }
 }
 

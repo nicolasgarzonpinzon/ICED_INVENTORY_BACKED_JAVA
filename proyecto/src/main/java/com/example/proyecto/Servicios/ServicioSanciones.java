@@ -58,7 +58,7 @@ public class ServicioSanciones {
     }
 
     public String actualizarSanciones(Sancion E){
-        if (repositorio.findById(String.valueOf(E.getSan_Pres_Id())).isPresent()){
+        if (repositorio.findById(String.valueOf(E.getPres_Id())).isPresent()){
             repositorio.save(E);
             return "Sancion actualiazada correctamente";
         }else{
