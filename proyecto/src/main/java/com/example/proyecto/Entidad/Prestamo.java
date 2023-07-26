@@ -1,10 +1,11 @@
 package com.example.proyecto.Entidad;
 
 import jakarta.persistence.*;
-
 import javax.xml.crypto.Data;
 import java.sql.Time;
 import java.time.LocalDate;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import java.util.Date;
 
 
 @Entity
@@ -12,78 +13,54 @@ import java.time.LocalDate;
 public class Prestamo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "Pres_Id")
-    private int presId;
+    private Integer presId;
 
-    @Column(nullable = false, name = "Pres_Fec_Entrega")
-    private LocalDate fechaEntrega;
 
-    @Column(nullable = false, name = "Pres_Hora_Entrega")
-    private Time horaEntrega;
+    @Column(name = "Pres_Fec_Entrega")
+    @Temporal(TemporalType.DATE)
+    private Date Pres_Fec_Entrega;
 
-    @Column(nullable = false, name = "Pres_Tiempo_Limite")
-    private int tiempoLimite;
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "Equ_id", referencedColumnName = "Equ_id", nullable = false)
+    @JsonIgnore
+    public Equipo equipo;
 
-    @Column(nullable = false, name = "Pres_Observaciones_entrega", length = 250)
-    private String observacionesEntrega;
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "Usu_Documento", referencedColumnName = "Usu_Documento", nullable = false)
+    @JsonIgnore
+    public Usuario usuario;
 
-    @ManyToOne
-    @JoinColumn(name = "Pres_Equipos_id")
-    private Equipo equipo;
 
-    @ManyToOne
-    @JoinColumn(name = "Pres_Usuarios_Documento")
-    private Usuario usuario;
+    @PrePersist
+    public void fechaActual() {
 
-    @OneToOne(mappedBy = "prestamo")
-    private Sancion sancion;
+        this.Pres_Fec_Entrega = new Date();
+    }
 
-    public Prestamo(int presId, LocalDate fechaEntrega, Time horaEntrega, int tiempoLimite, String observacionesEntrega) {
+    public Prestamo(Integer presId, Date pres_Fec_Entrega, Equipo equipo, Usuario usuario) {
         this.presId = presId;
-        this.fechaEntrega = fechaEntrega;
-        this.horaEntrega = horaEntrega;
-        this.tiempoLimite = tiempoLimite;
-        this.observacionesEntrega = observacionesEntrega;
+        Pres_Fec_Entrega = pres_Fec_Entrega;
+        this.equipo = equipo;
+        this.usuario = usuario;
     }
 
     public Prestamo() {
     }
 
-    public int getPresId() {
+    public Integer getPresId() {
         return presId;
     }
 
-    public void setPresId(int presId) {
+    public void setPresId(Integer presId) {
         this.presId = presId;
     }
 
-    public LocalDate getFechaEntrega() {
-        return fechaEntrega;
+    public Date getPres_Fec_Entrega() {
+        return Pres_Fec_Entrega;
     }
 
-    public void setFechaEntrega(LocalDate fechaEntrega) {
-        this.fechaEntrega = fechaEntrega;
-    }
-    public Time getHoraEntrega() {
-        return horaEntrega;
-    }
-    public void setHoraEntrega(Time horaEntrega) {
-        this.horaEntrega = horaEntrega;
-    }
-    public int getTiempoLimite() {
-        return tiempoLimite;
-    }
-
-    public void setTiempoLimite(int tiempoLimite) {
-        this.tiempoLimite = tiempoLimite;
-    }
-
-    public String getObservacionesEntrega() {
-        return observacionesEntrega;
-    }
-
-    public void setObservacionesEntrega(String observacionesEntrega) {
-        this.observacionesEntrega = observacionesEntrega;
+    public void setPres_Fec_Entrega(Date pres_Fec_Entrega) {
+        Pres_Fec_Entrega = pres_Fec_Entrega;
     }
 
     public Equipo getEquipo() {
@@ -102,22 +79,13 @@ public class Prestamo {
         this.usuario = usuario;
     }
 
-    public Sancion getSancion() {
-        return sancion;
-    }
-
-    public void setSancion(Sancion sancion) {
-        this.sancion = sancion;
-    }
-
     @Override
     public String toString() {
         return "Prestamo{" +
                 "presId=" + presId +
-                ", fechaEntrega=" + fechaEntrega +
-                ", horaEntrega=" + horaEntrega +
-                ", tiempoLimite=" + tiempoLimite +
-                ", observacionesEntrega='" + observacionesEntrega + '\'' +
+                ", Pres_Fec_Entrega=" + Pres_Fec_Entrega +
+                ", equipo=" + equipo +
+                ", usuario=" + usuario +
                 '}';
     }
 }

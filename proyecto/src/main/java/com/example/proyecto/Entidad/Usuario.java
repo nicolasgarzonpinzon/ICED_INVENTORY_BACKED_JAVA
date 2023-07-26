@@ -2,13 +2,17 @@ package com.example.proyecto.Entidad;
 
 import jakarta.persistence.*;
 
-import java.util.List;
+
+import jakarta.persistence.Entity;
+
+import java.util.Set;
+
 
 @Entity
 @Table(name="Usuario")
 public class Usuario {
     @Id
-    @Column(unique = true, length = 11)
+    @Column(length = 11)
     private int Usu_Documento;
 
     @Column(nullable = false, length = 100)
@@ -23,17 +27,14 @@ public class Usuario {
     @Column(nullable = false, length = 100)
     private String Usu_Celular;
 
-    @Column(nullable = false, length = 100)
+    @Column(nullable = false, length = 100, unique = true)
     private String Usu_Correo;
 
     @Column(nullable = false, length = 100)
     private String Usu_Ficha;
 
-    @OneToMany(mappedBy = "usuario")
-    private List<Prestamo> prestamos;
-
-    public Usuario() {
-    }
+    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Set<Prestamo> prestamos;
 
     public Usuario(int usu_Documento, String usu_Nombre, String usu_Apellido, String usu_Tipo, String usu_Celular, String usu_Correo, String usu_Ficha) {
         Usu_Documento = usu_Documento;
@@ -43,6 +44,9 @@ public class Usuario {
         Usu_Celular = usu_Celular;
         Usu_Correo = usu_Correo;
         Usu_Ficha = usu_Ficha;
+    }
+
+    public Usuario() {
     }
 
     public int getUsu_Documento() {
@@ -99,6 +103,14 @@ public class Usuario {
 
     public void setUsu_Ficha(String usu_Ficha) {
         Usu_Ficha = usu_Ficha;
+    }
+
+    public Set<Prestamo> getPrestamos() {
+        return prestamos;
+    }
+
+    public void setPrestamos(Set<Prestamo> prestamos) {
+        this.prestamos = prestamos;
     }
 
     @Override

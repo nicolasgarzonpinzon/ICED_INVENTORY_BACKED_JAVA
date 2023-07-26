@@ -2,14 +2,14 @@ package com.example.proyecto.Entidad;
 
 import jakarta.persistence.*;
 
-import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name="equipo")
 public class Equipo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(unique = true, length = 11)
+    @Column(length = 11)
     private int Equ_id;
 
     @Column(nullable = false, length = 50)
@@ -30,9 +30,8 @@ public class Equipo {
     @Column(nullable = false, length = 50)
     private String equi_especialidad;
 
-    @OneToMany(mappedBy = "equipo")
-    private List<Prestamo> prestamos;
-
+    @OneToMany(mappedBy = "equipo", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Set<Prestamo> prestamos;
 
     public Equipo(int equ_id, String equi_tipo, String equi_modelo, String equi_color, String equi_serial, String equi_estado, String equi_especialidad) {
         Equ_id = equ_id;
@@ -102,6 +101,14 @@ public class Equipo {
 
     public void setEqui_especialidad(String equi_especialidad) {
         this.equi_especialidad = equi_especialidad;
+    }
+
+    public Set<Prestamo> getPrestamos() {
+        return prestamos;
+    }
+
+    public void setPrestamos(Set<Prestamo> prestamos) {
+        this.prestamos = prestamos;
     }
 
     @Override
