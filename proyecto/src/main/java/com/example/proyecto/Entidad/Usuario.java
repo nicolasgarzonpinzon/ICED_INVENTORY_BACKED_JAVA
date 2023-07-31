@@ -36,7 +36,7 @@ public class Usuario {
     @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<Prestamo> prestamos;
 
-    public Usuario(int usu_Documento, String usu_Nombre, String usu_Apellido, String usu_Tipo, String usu_Celular, String usu_Correo, String usu_Ficha) {
+    public Usuario(int usu_Documento, String usu_Nombre, String usu_Apellido, String usu_Tipo, String usu_Celular, String usu_Correo, String usu_Ficha, Set<Prestamo> prestamos) {
         Usu_Documento = usu_Documento;
         Usu_Nombre = usu_Nombre;
         Usu_Apellido = usu_Apellido;
@@ -44,6 +44,7 @@ public class Usuario {
         Usu_Celular = usu_Celular;
         Usu_Correo = usu_Correo;
         Usu_Ficha = usu_Ficha;
+        this.prestamos = prestamos;
     }
 
     public Usuario() {

@@ -33,16 +33,16 @@ public class Equipo {
     @OneToMany(mappedBy = "equipo", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<Prestamo> prestamos;
 
-    public Equipo(int equ_id, String equi_tipo, String equi_modelo, String equi_color, String equi_serial, String equi_estado, String equi_especialidad) {
+    public Equipo(int equ_id, String equi_tipo, String equi_modelo, String equi_color, String equi_serial, String equi_estado, String equi_especialidad, Set<Prestamo> prestamos) {
         Equ_id = equ_id;
         Equi_tipo = equi_tipo;
         Equi_modelo = equi_modelo;
+        Equi_color = equi_color;
         Equi_serial = equi_serial;
         Equi_estado = equi_estado;
-        Equi_color = equi_color;
         this.equi_especialidad = equi_especialidad;
+        this.prestamos = prestamos;
     }
-
 
     public Equipo() {
     }
