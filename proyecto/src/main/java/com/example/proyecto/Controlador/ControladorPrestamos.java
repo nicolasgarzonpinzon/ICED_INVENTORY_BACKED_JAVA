@@ -33,6 +33,15 @@ public class ControladorPrestamos {
     public String eliminarUsuarioo(@PathVariable("presId") String id) {
         return Servicio.eliminarPrestamo(id);
     }
+    @PostMapping("/insertarPrestamo")
+    public String insertar_Prestamoo(@RequestBody Prestamo prestamo) {
+        // Obtener documentoUsuario y idEquipo del objeto prestamo
+        String documentoUsuario = String.valueOf(prestamo.getUsu_Documento_usurios()); // Asumiendo que hay un método getter en la clase Prestamo para obtener el documentoUsuario
+        String idEquipo = String.valueOf(prestamo.getEqu_id_equipos()); // Asumiendo que hay un método getter en la clase Prestamo para obtener el idEquipo
+
+        // Llamar al método del servicio con los parámetros adecuados
+        return Servicio.insertarPrestamo(documentoUsuario, idEquipo, prestamo);
+    }
 
     @PostMapping("/ActualizarPrestamo/")
     public String actualizarPrestamoo(@RequestBody Prestamo id){

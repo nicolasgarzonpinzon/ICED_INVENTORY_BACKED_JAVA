@@ -38,6 +38,8 @@ public class Usuario {
     @JsonIgnore
     private Set<Prestamo> prestamos;
 
+    public Usuario() {
+    }
     public Usuario(String usu_Documento, String usu_Nombre, String usu_Apellido, String usu_Tipo, String usu_Celular, String usu_Correo, String usu_Ficha, Set<Prestamo> prestamos) {
         this.Usu_Documento = usu_Documento;
         this.Usu_Nombre = usu_Nombre;
@@ -49,8 +51,7 @@ public class Usuario {
         this.prestamos = prestamos;
     }
 
-    public Usuario() {
-    }
+
 
     public String getUsu_Documento() {
         return Usu_Documento;

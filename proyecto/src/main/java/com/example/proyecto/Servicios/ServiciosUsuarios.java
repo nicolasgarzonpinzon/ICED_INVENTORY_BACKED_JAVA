@@ -31,20 +31,12 @@ public class ServiciosUsuarios {
         }
     }
 
-    public String insertarUsuario(Usuario usuario) {
-        if (usuario == null) {
-            return "Objeto de usuario nulo";
-        }
-
-        if (repositorio.findById(String.valueOf(usuario.getUsu_Documento())).isPresent()) {
-            return "El Usuario ya está registrado";
-        } else {
-            try {
-                repositorio.save(usuario);
-                return "Se registró el usuario correctamente";
-            } catch (Exception e) {
-                return "Error al registrar el usuario: " + e.getMessage();
-            }
+    public String insertaUsuario(Usuario user){
+        if (repositorio.findById(user.getUsu_Documento()).isPresent())
+            return "El Usuario ya existe";
+        else{
+            repositorio.save(user);
+            return "Registrado exitosamente";
         }
     }
 

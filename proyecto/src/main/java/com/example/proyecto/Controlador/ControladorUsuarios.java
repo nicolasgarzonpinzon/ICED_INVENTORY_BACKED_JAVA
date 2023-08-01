@@ -23,9 +23,9 @@ public class ControladorUsuarios {
         return servicio.BuscarUsuario(Usu_Documento);
     }
 
-    @PostMapping("/InsertarUsuario/")
-    public String insertarUsuarioo(@RequestBody Usuario usuario){
-        return servicio.insertarUsuario(usuario);
+    @PostMapping("/InsertarUsuario")
+    public String insertarUsuarioo(@RequestBody Usuario user){
+        return servicio.insertaUsuario(user);
     }
 
     @DeleteMapping("/EliminarUsuario/{Usu_Documento}")

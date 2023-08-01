@@ -17,11 +17,10 @@ public class ControladorEquipos {
     }
     //llamados de servicios
 
-     @GetMapping("/listarEquipos")
+    @GetMapping("/listarEquipos")
     public List<Equipo> ListarEquipos() {
         return servicio.mostrarTodos();
     }
-
     @GetMapping("/BuscarEquipo/{cod}")
     public ResponseEntity<?> buscarID(@PathVariable("cod") int Equ_id){
         return servicio.buscarEquipo(Equ_id);
@@ -31,8 +30,6 @@ public class ControladorEquipos {
     public String insertar_cli(@RequestBody Equipo user){
         return servicio.insertaEquipo(user);
     }
-
-
     @DeleteMapping("/Eliminar/{codigo}")
     public String eliminar(@PathVariable("codigo") String codigo) {
         return servicio.eliminarEquipo(codigo);
