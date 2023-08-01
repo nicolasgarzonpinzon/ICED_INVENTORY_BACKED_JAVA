@@ -11,18 +11,18 @@ import java.util.Optional;
 
 @Service
 public class ServiciosUsuarios {
-   private RepositorioUsuarios repositorio;
+   private RepositorioUsuarios reposiUsu;
 
     public ServiciosUsuarios(RepositorioUsuarios repositorio) {
-        this.repositorio = repositorio;
+        this.reposiUsu = repositorio;
     }
 
     public List<Usuario> mostrarTodosUsuarios() {
-        return repositorio.findAll();
+        return reposiUsu.findAll();
     }
 
     public ResponseEntity<?> BuscarUsuario(int Usu_Documento) {
-        Optional<Usuario> usuarioOptional = repositorio.findById(String.valueOf(Usu_Documento));
+        Optional<Usuario> usuarioOptional = reposiUsu.findById(String.valueOf(Usu_Documento));
         if (usuarioOptional.isPresent()) {
             Usuario usuario = usuarioOptional.get();
             return ResponseEntity.ok(usuario);
@@ -31,18 +31,18 @@ public class ServiciosUsuarios {
         }
     }
 
-    public String insertaUsuario(Usuario user){
-        if (repositorio.findById(user.getUsu_Documento()).isPresent())
+    public String insertaUsuario(Usuario Us){
+        if (reposiUsu.findById(Us.getUsu_Documento()).isPresent())
             return "El Usuario ya existe";
         else{
-            repositorio.save(user);
+            reposiUsu.save(Us);
             return "Registrado exitosamente";
         }
     }
 
     public String eliminarUsuario(String Usu_Documento) {
-        if (repositorio.findById(Usu_Documento).isPresent()) {
-            repositorio.deleteById(Usu_Documento);
+        if (reposiUsu.findById(Usu_Documento).isPresent()) {
+            reposiUsu.deleteById(Usu_Documento);
             return "El Usuario con numero de Documento " + Usu_Documento + " fue eliminado exitosamente";
         } else {
             return "No se encontró ningún Usuario con el Numero de Cedula " + Usu_Documento;
@@ -50,8 +50,8 @@ public class ServiciosUsuarios {
     }
 
     public String actualizarUsuario(Usuario Doc){
-        if (repositorio.findById(String.valueOf(Doc.getUsu_Documento())).isPresent()){
-            repositorio.save(Doc);
+        if (reposiUsu.findById(String.valueOf(Doc.getUsu_Documento())).isPresent()){
+            reposiUsu.save(Doc);
             return "La informacion del Usuario se actualizo correctamente";
         }else{
 

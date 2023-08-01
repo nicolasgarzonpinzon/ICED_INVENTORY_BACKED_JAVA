@@ -1,7 +1,6 @@
 package com.example.proyecto.Controlador;
 
 import com.example.proyecto.Entidad.Prestamo;
-import com.example.proyecto.Entidad.Usuario;
 import com.example.proyecto.Servicios.ServicioPrestamos;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -11,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
+@CrossOrigin(origins = "*")
 @RestController
 public class ControladorPrestamos {
 
@@ -33,14 +33,9 @@ public class ControladorPrestamos {
     public String eliminarUsuarioo(@PathVariable("presId") String id) {
         return Servicio.eliminarPrestamo(id);
     }
-    @PostMapping("/insertarPrestamo")
-    public String insertar_Prestamoo(@RequestBody Prestamo prestamo) {
-        // Obtener documentoUsuario y idEquipo del objeto prestamo
-        String documentoUsuario = String.valueOf(prestamo.getUsu_Documento_usurios()); // Asumiendo que hay un método getter en la clase Prestamo para obtener el documentoUsuario
-        String idEquipo = String.valueOf(prestamo.getEqu_id_equipos()); // Asumiendo que hay un método getter en la clase Prestamo para obtener el idEquipo
-
-        // Llamar al método del servicio con los parámetros adecuados
-        return Servicio.insertarPrestamo(documentoUsuario, idEquipo, prestamo);
+    @PostMapping("/insertarPrestamo/{Eq}/{Us}")
+    public String insertar_Prestamoo(@PathVariable("Eq") String Eq, @PathVariable("Us") String Us,@RequestBody Prestamo prestamo) {
+        return Servicio.insertarPrestamo(Eq, Us, prestamo);
     }
 
     @PostMapping("/ActualizarPrestamo/")

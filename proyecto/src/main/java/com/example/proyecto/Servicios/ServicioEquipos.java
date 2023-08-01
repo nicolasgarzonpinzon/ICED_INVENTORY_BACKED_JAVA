@@ -10,18 +10,18 @@ import java.util.Optional;
 
 @Service
 public class ServicioEquipos {
-    private RepositorioEquipos repositorio;
+    private RepositorioEquipos reposiEqui;
 
     public ServicioEquipos(RepositorioEquipos repositorio) {
-        this.repositorio = repositorio;
+        this.reposiEqui = repositorio;
     }
 
     public List<Equipo> mostrarTodos() {
-        return repositorio.findAll();
+        return reposiEqui.findAll();
     }
 
     public ResponseEntity<?> buscarEquipo(int equId) {
-        Optional<Equipo> equipoOptional = repositorio.findById(String.valueOf(equId));
+        Optional<Equipo> equipoOptional = reposiEqui.findById(String.valueOf(equId));
         if (equipoOptional.isPresent()) {
             Equipo equipo = equipoOptional.get();
             return ResponseEntity.ok(equipo);
@@ -30,11 +30,11 @@ public class ServicioEquipos {
         }
     }
 
-    public String insertaEquipo(Equipo user){
-        if (repositorio.findById(user.getEqu_id()).isPresent())
+    public String insertaEquipo(Equipo Eq){
+        if (reposiEqui.findById(Eq.getEqu_id()).isPresent())
             return "El equipo ya existe";
         else{
-            repositorio.save(user);
+            reposiEqui.save(Eq);
             return "Registrado exitosamente";
         }
     }
@@ -42,8 +42,8 @@ public class ServicioEquipos {
 
 
     public String eliminarEquipo(String codigo) {
-        if (repositorio.findById(codigo).isPresent()) {
-            repositorio.deleteById(codigo);
+        if (reposiEqui.findById(codigo).isPresent()) {
+            reposiEqui.deleteById(codigo);
             return "El Dispositivo con el codigo " + codigo + " fue eliminado exitosamente";
         } else {
             return "No se encontró ningún Dispositivo con el codigo " + codigo;
@@ -51,8 +51,8 @@ public class ServicioEquipos {
     }
 
     public String actualizarEquipo(Equipo E){
-        if (repositorio.findById(String.valueOf(E.getEqu_id())).isPresent()){
-            repositorio.save(E);
+        if (reposiEqui.findById(String.valueOf(E.getEqu_id())).isPresent()){
+            reposiEqui.save(E);
             return "El equipo se Actualizo correctamente";
         }else{
 

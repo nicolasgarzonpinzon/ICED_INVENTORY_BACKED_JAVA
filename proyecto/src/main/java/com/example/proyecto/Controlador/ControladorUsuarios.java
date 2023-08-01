@@ -24,8 +24,8 @@ public class ControladorUsuarios {
     }
 
     @PostMapping("/InsertarUsuario")
-    public String insertarUsuarioo(@RequestBody Usuario user){
-        return servicio.insertaUsuario(user);
+    public String insertarUsuarioo(@RequestBody Usuario Us){
+        return servicio.insertaUsuario(Us);
     }
 
     @DeleteMapping("/EliminarUsuario/{Usu_Documento}")
@@ -34,8 +34,8 @@ public class ControladorUsuarios {
     }
 
     @PostMapping("/ActualizarUsuario/")
-    public String actualizarUsuarioo(@RequestBody Usuario Doc){
-        return servicio.actualizarUsuario(Doc);
+    public String actualizarUsuarioo(@RequestBody Usuario Us){
+        return servicio.actualizarUsuario(Us);
     }
 
 }

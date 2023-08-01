@@ -1,24 +1,25 @@
 package com.example.proyecto.Servicios;
 
-import com.example.proyecto.Entidad.Equipo;
-import com.example.proyecto.Entidad.Prestamo;
+import com.example.proyecto.Entidad.*;
 import com.example.proyecto.Repositorio.RepositorioEquipos;
 import com.example.proyecto.Repositorio.RepositorioPrestamos;
+import com.example.proyecto.Repositorio.RepositorioUsuarios;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 import java.util.Optional;
 
 @Service
 public class ServicioPrestamos {
     private RepositorioPrestamos repositorio;
-
     private RepositorioEquipos reposiEqui;
+    private RepositorioUsuarios reposiUsu;
 
-    public ServicioPrestamos(RepositorioPrestamos repositorio){
-        this.repositorio= repositorio;
+    public ServicioPrestamos(RepositorioPrestamos repositorio, RepositorioEquipos reposiEqui, RepositorioUsuarios reposiUsu) {
+        this.repositorio = repositorio;
+        this.reposiEqui = reposiEqui;
+        this.reposiUsu = reposiUsu;
     }
 
     public List<Prestamo> MostrarTodosPrestamos(){
@@ -50,25 +51,20 @@ public class ServicioPrestamos {
         }
     }
 
-    public String insertarPrestamo(String documentoUsuario, String idEquipo, Prestamo prestamo) {
-        // Verificar si el equipo existe en la base de datos
-        Optional<Equipo> equipoOptional = reposiEqui.findById(idEquipo);
-        if (equipoOptional.isPresent()) {
-            // Asociar el equipo al préstamo
-            Equipo equipo = equipoOptional.get();
-            prestamo.setEqu_id_equipos(equipo);
+    public String insertarPrestamo(String Eq, String Us, Prestamo prestamo) {
+        if (reposiEqui.findById(Eq).isPresent() && reposiUsu.findById(Us).isPresent()){
+            Equipo eq = reposiEqui.findBy(Eq).get();
+            Usuario us = reposiUsu.findBy(Us).get();
 
-            // Verificar si ya existe un préstamo con el mismo ID
-            if (repositorio.findById(String.valueOf(prestamo.getPresId())).isPresent()) {
-                return "El código del préstamo ya existe";
-            } else {
-                // Guardar el préstamo en la base de datos
-                repositorio.save(prestamo);
-                return "Registrado exitosamente";
-            }
-        } else {
-            return "El equipo con el ID especificado no existe";
+            prestamo.setEqu_id_equipos(eq);
+            prestamo.setUsu_Documento_usurios(us);
+            repositorio.save(prestamo);
+            return "Registro Exitoso";
         }
+        else {
+            return "Cliente, Producto o Usuario mal ingresado";
+        }
+
     }
 
 

@@ -46,18 +46,20 @@ public class Prestamo {
         this.Pres_Fec_Entrega = new Date();
     }
 
+
+    public Prestamo(int presId, Date pres_Fec_Entrega, Time pres_Hora_Entrega, int pres_Tiempo_Limite, String pres_Observaciones_Entrega, Equipo equ_id_equipos, Usuario usu_Documento_usurios) {
+        this.presId = presId;
+        Pres_Fec_Entrega = pres_Fec_Entrega;
+        Pres_Hora_Entrega = pres_Hora_Entrega;
+        Pres_Tiempo_Limite = pres_Tiempo_Limite;
+        Pres_Observaciones_Entrega = pres_Observaciones_Entrega;
+        Equ_id_equipos = equ_id_equipos;
+        Usu_Documento_usurios = usu_Documento_usurios;
+    }
+
     public Prestamo() {
     }
 
-    public Prestamo(int presId, Date pres_Fec_Entrega, Time pres_Hora_Entrega, int pres_Tiempo_Limite, String pres_Observaciones_Entrega, Equipo equipo, Usuario usuario) {
-        this.presId = presId;
-        this.Pres_Fec_Entrega = pres_Fec_Entrega;
-        this.Pres_Hora_Entrega = pres_Hora_Entrega;
-        this.Pres_Tiempo_Limite = pres_Tiempo_Limite;
-        this.Pres_Observaciones_Entrega = pres_Observaciones_Entrega;
-        this.Equ_id_equipos = equipo;
-        this.Usu_Documento_usurios = usuario;
-    }
 
     public int getPresId() {
         return presId;
