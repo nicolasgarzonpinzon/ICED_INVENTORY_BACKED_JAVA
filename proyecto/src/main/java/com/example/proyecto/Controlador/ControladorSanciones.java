@@ -24,18 +24,18 @@ public class ControladorSanciones {
         return servicio.BuscarSancion(id_sancion);
     }
 
-    @PostMapping("/InsertarSanciones/")
-    public String insertarSancion(@RequestBody Sancion sancion){
-        return servicio.insertarSanciones(sancion);
-    }
+//    @PostMapping("/InsertarSanciones/")
+//    public String insertarSancion(@RequestBody Sancion sancion){
+//        return servicio.insertarSanciones(sancion);
+//    }
 
     @DeleteMapping("/EliminarSanciones/{id}")
     public String eliminar(@PathVariable("id") String id) {
         return servicio.eliminarSanciones(id);
     }
 
-    @PostMapping("/ActualizarSanciones/")
-    public String actualizarProductos(@RequestBody Sancion actu){
-        return servicio.actualizarSanciones(actu);
-    }
+//    @PostMapping("/ActualizarSanciones/")
+//    public String actualizarProductos(@RequestBody Sancion actu){
+//        return servicio.actualizarSanciones(actu);
+//    }
 }

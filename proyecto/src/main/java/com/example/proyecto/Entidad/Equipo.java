@@ -1,5 +1,6 @@
 package com.example.proyecto.Entidad;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.util.Set;
@@ -8,9 +9,8 @@ import java.util.Set;
 @Table(name="equipo")
 public class Equipo {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(length = 11)
-    private int Equ_id;
+    @Column(unique = true,length = 10)
+    private String Equ_id;
 
     @Column(nullable = false, length = 50)
     private String Equi_tipo;
@@ -30,10 +30,11 @@ public class Equipo {
     @Column(nullable = false, length = 50)
     private String equi_especialidad;
 
-    @OneToMany(mappedBy = "equipo", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "Equ_id_equipos", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JsonIgnore
     private Set<Prestamo> prestamos;
 
-    public Equipo(int equ_id, String equi_tipo, String equi_modelo, String equi_color, String equi_serial, String equi_estado, String equi_especialidad, Set<Prestamo> prestamos) {
+    public Equipo(String equ_id, String equi_tipo, String equi_modelo, String equi_color, String equi_serial, String equi_estado, String equi_especialidad, Set<Prestamo> prestamos) {
         Equ_id = equ_id;
         Equi_tipo = equi_tipo;
         Equi_modelo = equi_modelo;
@@ -47,11 +48,11 @@ public class Equipo {
     public Equipo() {
     }
 
-    public int getEqu_id() {
+    public String getEqu_id() {
         return Equ_id;
     }
 
-    public void setEqu_id(int equ_id) {
+    public void setEqu_id(String equ_id) {
         Equ_id = equ_id;
     }
 

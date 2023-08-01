@@ -1,13 +1,10 @@
 package com.example.proyecto.Entidad;
 
-import jakarta.persistence.*;
-import javax.xml.crypto.Data;
-import java.sql.Time;
-import java.time.LocalDate;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.*;
+import java.sql.Time;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
-
 import java.util.Date;
 
 
@@ -16,9 +13,7 @@ import java.util.Date;
 public class Prestamo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer presId;
-
-
+    private int presId;
     @Column(name = "Pres_Fec_Entrega",nullable = false)
     @Temporal(TemporalType.DATE)
     private Date Pres_Fec_Entrega;
@@ -35,12 +30,14 @@ public class Prestamo {
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "Equ_id", referencedColumnName = "Equ_id", nullable = false)
     @Fetch(FetchMode.JOIN)
-    public Equipo equipo;
+    @JsonIgnore
+    public Equipo Equ_id_equipos;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "Usu_Documento", referencedColumnName = "Usu_Documento", nullable = false)
     @Fetch(FetchMode.JOIN)
-    public Usuario usuario;
+    @JsonIgnore
+    public Usuario Usu_Documento_usurios;
 
 
     @PrePersist
@@ -52,21 +49,21 @@ public class Prestamo {
     public Prestamo() {
     }
 
-    public Prestamo(Integer presId, Date pres_Fec_Entrega, Time pres_Hora_Entrega, int pres_Tiempo_Limite, String pres_Observaciones_Entrega, Equipo equipo, Usuario usuario) {
+    public Prestamo(int presId, Date pres_Fec_Entrega, Time pres_Hora_Entrega, int pres_Tiempo_Limite, String pres_Observaciones_Entrega, Equipo equipo, Usuario usuario) {
         this.presId = presId;
-        Pres_Fec_Entrega = pres_Fec_Entrega;
-        Pres_Hora_Entrega = pres_Hora_Entrega;
-        Pres_Tiempo_Limite = pres_Tiempo_Limite;
-        Pres_Observaciones_Entrega = pres_Observaciones_Entrega;
-        this.equipo = equipo;
-        this.usuario = usuario;
+        this.Pres_Fec_Entrega = pres_Fec_Entrega;
+        this.Pres_Hora_Entrega = pres_Hora_Entrega;
+        this.Pres_Tiempo_Limite = pres_Tiempo_Limite;
+        this.Pres_Observaciones_Entrega = pres_Observaciones_Entrega;
+        this.Equ_id_equipos = equipo;
+        this.Usu_Documento_usurios = usuario;
     }
 
-    public Integer getPresId() {
+    public int getPresId() {
         return presId;
     }
 
-    public void setPresId(Integer presId) {
+    public void setPresId(int presId) {
         this.presId = presId;
     }
 
@@ -102,20 +99,20 @@ public class Prestamo {
         Pres_Observaciones_Entrega = pres_Observaciones_Entrega;
     }
 
-    public Equipo getEquipo() {
-        return equipo;
+    public Equipo getEqu_id_equipos() {
+        return Equ_id_equipos;
     }
 
-    public void setEquipo(Equipo equipo) {
-        this.equipo = equipo;
+    public void setEqu_id_equipos(Equipo equ_id_equipos) {
+        Equ_id_equipos = equ_id_equipos;
     }
 
-    public Usuario getUsuario() {
-        return usuario;
+    public Usuario getUsu_Documento_usurios() {
+        return Usu_Documento_usurios;
     }
 
-    public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
+    public void setUsu_Documento_usurios(Usuario usu_Documento_usurios) {
+        Usu_Documento_usurios = usu_Documento_usurios;
     }
 
     @Override
@@ -126,8 +123,8 @@ public class Prestamo {
                 ", Pres_Hora_Entrega=" + Pres_Hora_Entrega +
                 ", Pres_Tiempo_Limite=" + Pres_Tiempo_Limite +
                 ", Pres_Observaciones_Entrega='" + Pres_Observaciones_Entrega + '\'' +
-                ", equipo=" + equipo.getEqu_id() +
-                ", usuario=" + usuario.getUsu_Documento() +
+                ", equipo=" + Equ_id_equipos.getEqu_id() +
+                ", usuario=" + Usu_Documento_usurios.getUsu_Documento() +
                 '}';
     }
 

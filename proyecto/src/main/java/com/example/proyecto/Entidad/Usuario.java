@@ -1,5 +1,6 @@
 package com.example.proyecto.Entidad;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 
@@ -13,7 +14,7 @@ import java.util.Set;
 public class Usuario {
     @Id
     @Column(length = 11)
-    private int Usu_Documento;
+    private String Usu_Documento;
 
     @Column(nullable = false, length = 100)
     private String Usu_Nombre;
@@ -33,28 +34,29 @@ public class Usuario {
     @Column(nullable = false, length = 100)
     private String Usu_Ficha;
 
-    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "Usu_Documento_usurios", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JsonIgnore
     private Set<Prestamo> prestamos;
 
-    public Usuario(int usu_Documento, String usu_Nombre, String usu_Apellido, String usu_Tipo, String usu_Celular, String usu_Correo, String usu_Ficha, Set<Prestamo> prestamos) {
-        Usu_Documento = usu_Documento;
-        Usu_Nombre = usu_Nombre;
-        Usu_Apellido = usu_Apellido;
-        Usu_Tipo = usu_Tipo;
-        Usu_Celular = usu_Celular;
-        Usu_Correo = usu_Correo;
-        Usu_Ficha = usu_Ficha;
+    public Usuario(String usu_Documento, String usu_Nombre, String usu_Apellido, String usu_Tipo, String usu_Celular, String usu_Correo, String usu_Ficha, Set<Prestamo> prestamos) {
+        this.Usu_Documento = usu_Documento;
+        this.Usu_Nombre = usu_Nombre;
+        this.Usu_Apellido = usu_Apellido;
+        this.Usu_Tipo = usu_Tipo;
+        this.Usu_Celular = usu_Celular;
+        this.Usu_Correo = usu_Correo;
+        this.Usu_Ficha = usu_Ficha;
         this.prestamos = prestamos;
     }
 
     public Usuario() {
     }
 
-    public int getUsu_Documento() {
+    public String getUsu_Documento() {
         return Usu_Documento;
     }
 
-    public void setUsu_Documento(int usu_Documento) {
+    public void setUsu_Documento(String usu_Documento) {
         Usu_Documento = usu_Documento;
     }
 

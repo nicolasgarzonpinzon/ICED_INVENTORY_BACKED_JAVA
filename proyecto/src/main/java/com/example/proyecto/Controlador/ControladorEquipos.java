@@ -19,8 +19,7 @@ public class ControladorEquipos {
 
      @GetMapping("/listarEquipos")
     public List<Equipo> ListarEquipos() {
-        List<Equipo> equipos = servicio.mostrarTodos();
-        return equipos;
+        return servicio.mostrarTodos();
     }
 
     @GetMapping("/BuscarEquipo/{cod}")
@@ -28,9 +27,9 @@ public class ControladorEquipos {
         return servicio.buscarEquipo(Equ_id);
     }
 
-    @PostMapping("/InsertarEquipo/")
-    public String insertarEquipoo(@RequestBody Equipo equipo) {
-        return servicio.insertarEquipo(equipo);
+    @PostMapping("/insertarEquipo")
+    public String insertar_cli(@RequestBody Equipo user){
+        return servicio.insertaEquipo(user);
     }
 
 

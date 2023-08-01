@@ -20,7 +20,7 @@ public class ControladorPrestamos {
         this.Servicio= servicio;
     }
 
-        @GetMapping("/ListarPrestamos")
+    @GetMapping("/ListarPrestamos")
     public List<Prestamo> listarPrestamos(){
         return Servicio.MostrarTodosPrestamos();
     }
@@ -33,10 +33,7 @@ public class ControladorPrestamos {
     public String eliminarUsuarioo(@PathVariable("presId") String id) {
         return Servicio.eliminarPrestamo(id);
     }
-    @PostMapping("/InsertarPrestamo/")
-    public String insertarPrestamoo(@RequestBody Prestamo prestamo){
-        return Servicio.insertarPrestamo(prestamo);
-    }
+
     @PostMapping("/ActualizarPrestamo/")
     public String actualizarPrestamoo(@RequestBody Prestamo id){
         return Servicio.actualizarPrestamo(id);

@@ -31,22 +31,22 @@ public class ServicioSanciones {
         }
     }
 
-    public String insertarSanciones(Sancion sancion) {
-        if (sancion == null) {
-            return "Objeto de Sancion nulo";
-        }
-
-        if (repositorio.findById(String.valueOf(sancion.getPres_Id())).isPresent()) {
-            return "Sancion ya registrada";
-        } else {
-            try {
-                repositorio.save(sancion);
-                return "Se registró la Sancion correctamente";
-            } catch (Exception e) {
-                return "Error al registrar la Sancion: " + e.getMessage();
-            }
-        }
-    }
+//    public String insertarSanciones(Sancion sancion) {
+//        if (sancion == null) {
+//            return "Objeto de Sancion nulo";
+//        }
+//
+//        if (repositorio.findById(String.valueOf(sancion.getPres_Id())).isPresent()) {
+//            return "Sancion ya registrada";
+//        } else {
+//            try {
+//                repositorio.save(sancion);
+//                return "Se registró la Sancion correctamente";
+//            } catch (Exception e) {
+//                return "Error al registrar la Sancion: " + e.getMessage();
+//            }
+//        }
+//    }
 
     public String eliminarSanciones(String id) {
         if (repositorio.findById(id).isPresent()) {
@@ -57,15 +57,15 @@ public class ServicioSanciones {
         }
     }
 
-    public String actualizarSanciones(Sancion E){
-        if (repositorio.findById(String.valueOf(E.getPres_Id())).isPresent()){
-            repositorio.save(E);
-            return "Sancion actualiazada correctamente";
-        }else{
-
-            return "la sancion no se actualizo, id ya existente";
-        }
-    }
+//    public String actualizarSanciones(Sancion E){
+//        if (repositorio.findById(String.valueOf(E.getPres_Id())).isPresent()){
+//            repositorio.save(E);
+//            return "Sancion actualiazada correctamente";
+//        }else{
+//
+//            return "la sancion no se actualizo, id ya existente";
+//        }
+//    }
 
     }
 
