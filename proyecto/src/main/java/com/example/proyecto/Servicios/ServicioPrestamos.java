@@ -41,21 +41,32 @@ public class ServicioPrestamos {
 
 
 
-    public String actualizarPrestamo(Prestamo id){
-        if (repositorio.findById(String.valueOf(id.getPresId())).isPresent()){
-            repositorio.save(id);
-            return "El prestamo se Actualizo exitosamente";
-        }else{
+    public String actualizarPrestamo(String Eq, String Us, Prestamo prestamo){
+        if (reposiEqui.findById(Eq).isPresent() && reposiUsu.findById(Us).isPresent()){
+            Equipo eq = reposiEqui.findById(Eq).get();
+            Usuario us = reposiUsu.findById(Us).get();
+            prestamo.setEqu_id_equipos(eq);
+            prestamo.setUsu_Documento_usurios(us);
+            repositorio.save(prestamo);
+            if (repositorio.findById(String.valueOf(prestamo.getPresId())).isPresent()){
+                repositorio.save(prestamo);
+                return "Actualizado exitosamente";
+            }
+            else{
 
-            return "El id del prestamo no se modificar: ERROR al actualizar el Prestamo: "+id.getPresId();
+                return "El prestamo no existe";
+            }
+        }
+        else{
+
+            return "Equipo o Usuario  mal ingresado";
         }
     }
 
     public String insertarPrestamo(String Eq, String Us, Prestamo prestamo) {
         if (reposiEqui.findById(Eq).isPresent() && reposiUsu.findById(Us).isPresent()){
-            Equipo eq = reposiEqui.findBy(Eq).get();
-            Usuario us = reposiUsu.findBy(Us).get();
-
+            Equipo eq = reposiEqui.findById(Eq).get();
+            Usuario us = reposiUsu.findById(Us).get();
             prestamo.setEqu_id_equipos(eq);
             prestamo.setUsu_Documento_usurios(us);
             repositorio.save(prestamo);
@@ -68,12 +79,12 @@ public class ServicioPrestamos {
     }
 
 
-    public String eliminarPrestamo(String id) {
-        if (repositorio.findById(id).isPresent()) {
-            repositorio.deleteById(id);
-            return "El Dispositivo con el codigo " + id + " fue eliminado exitosamente";
+    public String eliminarPrestamo(int presId) {
+        if (repositorio.findById(String.valueOf(presId)).isPresent()) {
+            repositorio.deleteById(String.valueOf(presId));
+            return "El Dispositivo con el codigo " + presId + " fue eliminado exitosamente";
         } else {
-            return "No se encontró ningún Dispositivo con el codigo " + id;
+            return "No se encontró ningún Dispositivo con el codigo " + presId;
         }
     }
 

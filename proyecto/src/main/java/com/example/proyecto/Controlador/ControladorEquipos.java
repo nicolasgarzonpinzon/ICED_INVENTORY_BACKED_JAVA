@@ -1,15 +1,11 @@
 package com.example.proyecto.Controlador;
 import com.example.proyecto.Entidad.Equipo;
-
 import com.example.proyecto.Servicios.ServicioEquipos;
-
 import org.springframework.http.ResponseEntity;
-
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
+@CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 public class ControladorEquipos {
 
@@ -18,12 +14,12 @@ public class ControladorEquipos {
     public ControladorEquipos(ServicioEquipos servicio) {
         this.servicio = servicio;
     }
-    //llamados de servicios
 
     @GetMapping("/listarEquipos")
     public List<Equipo> ListarEquipos() {
         return servicio.mostrarTodos();
     }
+
     @GetMapping("/BuscarEquipo/{cod}")
     public ResponseEntity<?> buscarID(@PathVariable("cod") int Equ_id){
         return servicio.buscarEquipo(Equ_id);
@@ -33,6 +29,7 @@ public class ControladorEquipos {
     public String insertar_cli(@RequestBody Equipo Eq){
         return servicio.insertaEquipo(Eq);
     }
+
     @DeleteMapping("/Eliminar/{codigo}")
     public String eliminar(@PathVariable("codigo") String codigo) {
         return servicio.eliminarEquipo(codigo);
@@ -42,4 +39,5 @@ public class ControladorEquipos {
     public String actualizarProductos(@RequestBody Equipo Eq){
         return servicio.actualizarEquipo(Eq);
     }
+
 }
