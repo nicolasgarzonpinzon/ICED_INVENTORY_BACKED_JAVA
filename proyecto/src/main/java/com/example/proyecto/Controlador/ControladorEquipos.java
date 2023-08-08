@@ -27,7 +27,7 @@ public class ControladorEquipos {
 
     @PostMapping("/insertarEquipo")
     public String insertar_cli(@RequestBody Equipo Eq){
-        return servicio.insertaEquipo(Eq);
+        return servicio.insertarEquipo(Eq);
     }
 
     @DeleteMapping("/Eliminar/{codigo}")

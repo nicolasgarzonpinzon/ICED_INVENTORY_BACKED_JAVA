@@ -10,18 +10,18 @@ import java.util.Optional;
 
 @Service
 public class ServicioEquipos {
-    private RepositorioEquipos reposiEqui;
+    private RepositorioEquipos repositorio;
 
     public ServicioEquipos(RepositorioEquipos repositorio) {
-        this.reposiEqui = repositorio;
+        this.repositorio = repositorio;
     }
 
     public List<Equipo> mostrarTodos() {
-        return reposiEqui.findAll();
+        return repositorio.findAll();
     }
 
     public ResponseEntity<?> buscarEquipo(int equId) {
-        Optional<Equipo> equipoOptional = reposiEqui.findById(String.valueOf(equId));
+        Optional<Equipo> equipoOptional = repositorio.findById(String.valueOf(equId));
         if (equipoOptional.isPresent()) {
             Equipo equipo = equipoOptional.get();
             return ResponseEntity.ok(equipo);
@@ -30,20 +30,29 @@ public class ServicioEquipos {
         }
     }
 
-    public String insertaEquipo(Equipo Eq){
-        if (reposiEqui.findById(Eq.getEqu_id()).isPresent())
-            return "El equipo ya existe";
-        else{
-            reposiEqui.save(Eq);
-            return "Registrado exitosamente";
+
+    public String insertarEquipo(Equipo equipo) {
+        if (equipo == null) {
+            return "Objeto de equipo nulo";
+        }
+
+        if (repositorio.findById(String.valueOf(equipo.getEqu_id())).isPresent()) {
+            return "El equipo ya está registrado";
+        } else {
+            try {
+                repositorio.save(equipo);
+                return "Se registró el equipo correctamente";
+            } catch (Exception e) {
+                return "Error al registrar el equipo: " + e.getMessage();
+            }
         }
     }
 
 
 
     public String eliminarEquipo(String codigo) {
-        if (reposiEqui.findById(codigo).isPresent()) {
-            reposiEqui.deleteById(codigo);
+        if (repositorio.findById(codigo).isPresent()) {
+            repositorio.deleteById(codigo);
             return "El Dispositivo con el codigo " + codigo + " fue eliminado exitosamente";
         } else {
             return "No se encontró ningún Dispositivo con el codigo " + codigo;
@@ -51,8 +60,8 @@ public class ServicioEquipos {
     }
 
     public String actualizarEquipo(Equipo E){
-        if (reposiEqui.findById(String.valueOf(E.getEqu_id())).isPresent()){
-            reposiEqui.save(E);
+        if (repositorio.findById(String.valueOf(E.getEqu_id())).isPresent()){
+            repositorio.save(E);
             return "El equipo se Actualizo correctamente";
         }else{
 

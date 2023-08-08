@@ -10,8 +10,9 @@ import java.util.Set;
 @Table(name="equipo")
 public class Equipo {
     @Id
-    @Column(unique = true,length = 10)
-    private String Equ_id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(unique = true, length = 11)
+    private int Equ_id;
 
     @Column(nullable = false, length = 50)
     private String Equi_tipo;
@@ -35,7 +36,7 @@ public class Equipo {
     @JsonIgnore
     private Set<Prestamo> prestamos;
 
-    public Equipo(String equ_id, String equi_tipo, String equi_modelo, String equi_color, String equi_serial, String equi_estado, String equi_especialidad, Set<Prestamo> prestamos) {
+    public Equipo(int equ_id, String equi_tipo, String equi_modelo, String equi_color, String equi_serial, String equi_estado, String equi_especialidad, Set<Prestamo> prestamos) {
         Equ_id = equ_id;
         Equi_tipo = equi_tipo;
         Equi_modelo = equi_modelo;
@@ -49,11 +50,11 @@ public class Equipo {
     public Equipo() {
     }
 
-    public String getEqu_id() {
+    public int getEqu_id() {
         return Equ_id;
     }
 
-    public void setEqu_id(String equ_id) {
+    public void setEqu_id(int equ_id) {
         Equ_id = equ_id;
     }
 
