@@ -31,14 +31,16 @@ public class ServiciosUsuarios {
         }
     }
 
-    public String insertaUsuario(Usuario Us){
-        if (reposiUsu.findById(Us.getUsu_Documento()).isPresent())
-            return "El Usuario ya existe";
-        else{
+    public String insertaUsuario(Usuario Us) {
+        Optional<Usuario> existingUser = reposiUsu.findById(Us.getUsu_Documento());
+        if (existingUser.isPresent()) {
+            return "Usuario ya existente en la base de datos";
+        } else {
             reposiUsu.save(Us);
             return "Registrado exitosamente";
         }
     }
+
 
     public String eliminarUsuario(String Usu_Documento) {
         if (reposiUsu.findById(Usu_Documento).isPresent()) {

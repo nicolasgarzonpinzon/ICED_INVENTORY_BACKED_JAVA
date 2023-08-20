@@ -68,5 +68,9 @@ public class ServicioEquipos {
             return "El id del equipo ya existe";
         }
     }
+
+    public long contarPrestamos() {
+        return repositorio.count();
+    }
 }
 

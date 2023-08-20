@@ -20,6 +20,13 @@ public class ControladorEquipos {
         return servicio.mostrarTodos();
     }
 
+    @GetMapping("/count")
+    public ResponseEntity<?> contarPrestamos() {
+        long cantidad = servicio.contarPrestamos();
+        return ResponseEntity.ok("La cantidad de equipos registrados es: " + cantidad);
+    }
+
+
     @GetMapping("/BuscarEquipo/{cod}")
     public ResponseEntity<?> buscarID(@PathVariable("cod") int Equ_id){
         return servicio.buscarEquipo(Equ_id);
@@ -39,5 +46,6 @@ public class ControladorEquipos {
     public String actualizarProductos(@RequestBody Equipo Eq){
         return servicio.actualizarEquipo(Eq);
     }
+
 
 }
