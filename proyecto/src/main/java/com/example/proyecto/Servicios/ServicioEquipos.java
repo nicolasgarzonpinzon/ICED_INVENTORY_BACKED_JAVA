@@ -59,9 +59,9 @@ public class ServicioEquipos {
         }
     }
 
-    public String actualizarEquipo(Equipo E){
-        if (repositorio.findById(String.valueOf(E.getEqu_id())).isPresent()){
-            repositorio.save(E);
+    public String actualizarEquipo(Equipo codigo){
+        if (repositorio.findById(String.valueOf(codigo.getEqu_id())).isPresent()){
+            repositorio.save(codigo);
             return "El equipo se Actualizo correctamente";
         }else{
 
@@ -69,7 +69,7 @@ public class ServicioEquipos {
         }
     }
 
-    public long contarPrestamos() {
+    public long contarEquipos() {
         return repositorio.count();
     }
 }

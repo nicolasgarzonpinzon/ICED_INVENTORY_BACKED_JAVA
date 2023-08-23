@@ -20,6 +20,12 @@ public class ControladorUsuarios {
         return servicio.mostrarTodosUsuarios();
     }
 
+    @GetMapping("/contarUsuarios")
+    public ResponseEntity<?> contarUsuarios(){
+        long cantidad =servicio.contarUsuarios();
+        return ResponseEntity.ok("la cantidad de usuarios registrados es: "+cantidad);
+    }
+
     @GetMapping("/BuscarUsuario/{cod}")
     public ResponseEntity<?> BuscarID(@PathVariable("cod") int Usu_Documento){
         return servicio.BuscarUsuario(Usu_Documento);

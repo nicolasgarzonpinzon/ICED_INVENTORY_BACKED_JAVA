@@ -60,4 +60,9 @@ public class ServiciosUsuarios {
             return "El usuario no se actualizo, Numero de Cedula no actualizable";
         }
     }
+
+
+    public long contarUsuarios(){
+        return reposiUsu.count();
+    }
 }

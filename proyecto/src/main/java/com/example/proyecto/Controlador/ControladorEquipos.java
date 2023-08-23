@@ -20,9 +20,9 @@ public class ControladorEquipos {
         return servicio.mostrarTodos();
     }
 
-    @GetMapping("/count")
-    public ResponseEntity<?> contarPrestamos() {
-        long cantidad = servicio.contarPrestamos();
+    @GetMapping("/contarEquipos")
+    public ResponseEntity<?> contarEquipos() {
+        long cantidad = servicio.contarEquipos();
         return ResponseEntity.ok("La cantidad de equipos registrados es: " + cantidad);
     }
 
@@ -42,6 +42,8 @@ public class ControladorEquipos {
         return servicio.eliminarEquipo(codigo);
     }
 
+
+    //metodo antiguo de actualizar que se llama todo el objeto para actualizar
     @PostMapping("/ActualizarEquipo/")
     public String actualizarProductos(@RequestBody Equipo Eq){
         return servicio.actualizarEquipo(Eq);
