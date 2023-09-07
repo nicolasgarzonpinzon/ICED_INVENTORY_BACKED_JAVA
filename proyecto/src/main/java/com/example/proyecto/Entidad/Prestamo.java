@@ -33,7 +33,7 @@ public class Prestamo {
     public Equipo equipo;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "Usu_Documento", referencedColumnName = "Usu_Documento", nullable = false)
+    @JoinColumn(name = "usu_Documento", referencedColumnName = "usu_Documento", nullable = false)
     @JsonIgnore
     public Usuario usuario;
 
