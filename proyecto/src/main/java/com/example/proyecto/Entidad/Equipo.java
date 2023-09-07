@@ -32,7 +32,7 @@ public class Equipo {
     @Column(nullable = false, length = 50)
     private String equi_especialidad;
 
-    @OneToMany(mappedBy = "Equ_id_equipos", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "equipo", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JsonIgnore
     private Set<Prestamo> prestamos;
 

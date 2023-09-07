@@ -29,8 +29,8 @@ public class ControladorPrestamos {
         return Servicio.eliminarPrestamo(PresId);
     }
     @PostMapping("/insertarPrestamo/{Eq}/{Us}")
-    public String insertar_Prestamoo(@PathVariable("Eq") String Eq, @PathVariable("Us") String Us,@RequestBody Prestamo prestamo) {
-        return Servicio.insertarPrestamo(Eq, Us, prestamo);
+    public String insertar_Prestamoo(@PathVariable("Eq") String Eq, @PathVariable("Us") String Us) {
+        return Servicio.insertarPrestamo(Eq, Us);
     }
 
     @PostMapping("/ActualizarPrestamo/{Eq}/{Us}")

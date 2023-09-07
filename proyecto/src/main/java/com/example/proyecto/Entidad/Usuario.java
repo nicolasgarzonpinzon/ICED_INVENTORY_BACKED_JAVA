@@ -34,7 +34,7 @@ public class Usuario {
     @Column(nullable = false, length = 100)
     private String Usu_Ficha;
 
-    @OneToMany(mappedBy = "Usu_Documento_usurios", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JsonIgnore
     private Set<Prestamo> prestamos;
 

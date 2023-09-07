@@ -29,15 +29,13 @@ public class Prestamo {
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "Equ_id", referencedColumnName = "Equ_id", nullable = false)
-    @Fetch(FetchMode.JOIN)
     @JsonIgnore
-    public Equipo Equ_id_equipos;
+    public Equipo equipo;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "Usu_Documento", referencedColumnName = "Usu_Documento", nullable = false)
-    @Fetch(FetchMode.JOIN)
     @JsonIgnore
-    public Usuario Usu_Documento_usurios;
+    public Usuario usuario;
 
 
     @PrePersist
@@ -46,20 +44,18 @@ public class Prestamo {
         this.Pres_Fec_Entrega = new Date();
     }
 
-
-    public Prestamo(int presId, Date pres_Fec_Entrega, Time pres_Hora_Entrega, int pres_Tiempo_Limite, String pres_Observaciones_Entrega, Equipo equ_id_equipos, Usuario usu_Documento_usurios) {
+    public Prestamo(int presId, Date pres_Fec_Entrega, Time pres_Hora_Entrega, int pres_Tiempo_Limite, String pres_Observaciones_Entrega, Equipo equipo, Usuario usuario) {
         this.presId = presId;
         Pres_Fec_Entrega = pres_Fec_Entrega;
         Pres_Hora_Entrega = pres_Hora_Entrega;
         Pres_Tiempo_Limite = pres_Tiempo_Limite;
         Pres_Observaciones_Entrega = pres_Observaciones_Entrega;
-        Equ_id_equipos = equ_id_equipos;
-        Usu_Documento_usurios = usu_Documento_usurios;
+        this.equipo = equipo;
+        this.usuario = usuario;
     }
 
     public Prestamo() {
     }
-
 
     public int getPresId() {
         return presId;
@@ -101,20 +97,20 @@ public class Prestamo {
         Pres_Observaciones_Entrega = pres_Observaciones_Entrega;
     }
 
-    public Equipo getEqu_id_equipos() {
-        return Equ_id_equipos;
+    public Equipo getEquipo() {
+        return equipo;
     }
 
-    public void setEqu_id_equipos(Equipo equ_id_equipos) {
-        Equ_id_equipos = equ_id_equipos;
+    public void setEquipo(Equipo equipo) {
+        this.equipo = equipo;
     }
 
-    public Usuario getUsu_Documento_usurios() {
-        return Usu_Documento_usurios;
+    public Usuario getUsuario() {
+        return usuario;
     }
 
-    public void setUsu_Documento_usurios(Usuario usu_Documento_usurios) {
-        Usu_Documento_usurios = usu_Documento_usurios;
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 
     @Override
@@ -125,9 +121,8 @@ public class Prestamo {
                 ", Pres_Hora_Entrega=" + Pres_Hora_Entrega +
                 ", Pres_Tiempo_Limite=" + Pres_Tiempo_Limite +
                 ", Pres_Observaciones_Entrega='" + Pres_Observaciones_Entrega + '\'' +
-                ", equipo=" + Equ_id_equipos.getEqu_id() +
-                ", usuario=" + Usu_Documento_usurios.getUsu_Documento() +
+                ", equipo=" + equipo.getEqui_tipo() +
+                ", usuario=" + usuario.getUsu_Tipo() +
                 '}';
     }
-
 }

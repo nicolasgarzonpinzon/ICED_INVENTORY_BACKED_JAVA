@@ -41,8 +41,8 @@ public class ServicioPrestamos {
         if (reposiEqui.findById(Eq).isPresent() && reposiUsu.findById(Us).isPresent()){
             Equipo eq = reposiEqui.findById(Eq).get();
             Usuario us = reposiUsu.findById(Us).get();
-            prestamo.setEqu_id_equipos(eq);
-            prestamo.setUsu_Documento_usurios(us);
+            prestamo.setEquipo(eq);
+            prestamo.setUsuario(us);
             repositorio.save(prestamo);
             if (repositorio.findById(String.valueOf(prestamo.getPresId())).isPresent()){
                 repositorio.save(prestamo);
@@ -59,14 +59,16 @@ public class ServicioPrestamos {
         }
     }
 
-    public String insertarPrestamo(String Eq, String Us, Prestamo prestamo) {
-        if (reposiEqui.findById(Eq).isPresent() && reposiUsu.findById(Us).isPresent()){
-            Equipo eq = reposiEqui.findById(Eq).get();
-            Usuario us = reposiUsu.findById(Us).get();
-            prestamo.setEqu_id_equipos(eq);
-            prestamo.setUsu_Documento_usurios(us);
-            repositorio.save(prestamo);
-            return "Registro Exitoso";
+    public String insertarPrestamo(String Eq, String Us) {
+
+        Prestamo p= new Prestamo();
+        Equipo eq = reposiEqui.findById(Eq).get();
+        Usuario us = reposiUsu.findById(Us).get();
+        if(reposiEqui.findById(Eq).isPresent() && reposiUsu.findById(Us).isPresent()){
+            p.setEquipo(eq);
+            p.setUsuario(us);
+            repositorio.save(p);
+            return "Prestamo Registrado";
         }
         else {
             return "Cliente, Producto o Usuario mal ingresado";
